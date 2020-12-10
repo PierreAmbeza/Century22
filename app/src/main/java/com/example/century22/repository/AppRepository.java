@@ -82,18 +82,14 @@ public class AppRepository {
 
     public void addAgent(Agent agent) { appdatabase.agentDao().addAgent(agent); }
 
+    public Agent getAgentByName(String name, String lastname){ return appdatabase.agentDao().getAgentByName(name, lastname); }
+
     public void deleteAgents(){ appdatabase.agentDao().del(); }
 
     public List<Property> getProperties() { return appdatabase.propertyDao().getAllProperties(); }
 
     public void addProperty(Property property)
     {
-        List<Property> properties = getProperties();
-        for(int i = 0; i < properties.size(); i++)
-        {
-            if(properties.get(i).address.equalsIgnoreCase(property.address))
-                return;
-        }
         appdatabase.propertyDao().addProperty(property);
     }
 
@@ -101,11 +97,15 @@ public class AppRepository {
 
     public List<Type> getTypes() { return appdatabase.typeDAO().getAllTypes(); }
 
+    public Type getType(int id){ return appdatabase.typeDAO().getType(id); }
+
     public void addType(Type type) { appdatabase.typeDAO().addType(type); }
 
     public void deleteTypes(){ appdatabase.typeDAO().del(); }
 
     public List<Status> getStatus() { return appdatabase.statusDAO().getAllStatus(); }
+
+    public Status getStatus(int id){ return appdatabase.statusDAO().getStatus(id); }
 
     public void addStatus(Status status) { appdatabase.statusDAO().addStatus(status); }
 

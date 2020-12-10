@@ -13,8 +13,8 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        
-        <activity android:name=".view.AgentsActivity">
+
+        <activity android:name=".view.AgentsActivity"><!-- .view.PropertyActivity -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,6 +28,14 @@
         <activity
             android:name=".view.GoogleMapsActivity"
             android:parentActivityName=".view.ProfileActivity"
+            />
+        <activity
+            android:name=".view.PropertiesActivity"
+            android:parentActivityName=".view.AgentsActivity"
+            />
+        <activity
+            android:name=".view.AddPropertyActivity"
+            android:parentActivityName=".view.PropertiesActivity"
             />
     </application>
 

@@ -18,6 +18,9 @@ public interface StatusDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addStatus(Status status);
 
+    @Query("SELECT * FROM Status WHERE id = :id")
+    Status getStatus(int id);
+
     @Query("Delete FROM Status")
     void del();
 

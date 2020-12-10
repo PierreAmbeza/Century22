@@ -52,7 +52,6 @@ final public class AgentsActivity
     {
         super.onResume();
         initList();
-        addProperty();
         //addProperty();
         //We init the list into the onResume method
         //so the list is updated each time the screen goes to foreground
@@ -70,22 +69,6 @@ final public class AgentsActivity
         final List<Agent> agents = viewModel.loadAgents();
         final AgentAdapter agentsAdapter = new AgentAdapter(agents);
         recyclerView.setAdapter(agentsAdapter);
-
-    }
-
-    private void addProperty()
-    {
-        Date d = Calendar.getInstance().getTime();
-        List<Agent> la = AppRepository.getInstance(this).getAgents();
-        int a = la.get(0).id;
-        List<Type> lt = AppRepository.getInstance(this).getTypes();
-        int t = lt.get(0).id;
-        List<Status> ls = AppRepository.getInstance(this).getStatus();
-        int s = ls.get(0).id;
-        AppRepository.getInstance(this).addProperty(new Property(10, 10, 4, t, "description", "47 avenue de la division Leclerc, 92320 Châtillon, France",
-                48, 2, s, a , d, d));
-        List<Property> lp = AppRepository.getInstance(this).getProperties();
-        Log.d(AgentsActivity.class.getSimpleName(), String.valueOf(lp.get(0).add_date));
 
     }
 

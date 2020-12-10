@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity implements OnClickListene
 
     public void retrieveUser()
     {
-        final String userLogin = AppPreferences.getAgentLogin(this);
+        final String userLogin = AppPreferences.getAgentName(this);
         if(!TextUtils.isEmpty(userLogin))
             name.setText(userLogin);
         Log.d(ProfileActivity.class.getSimpleName(), userLogin);

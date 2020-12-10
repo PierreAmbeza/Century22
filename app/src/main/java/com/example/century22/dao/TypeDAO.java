@@ -5,6 +5,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
+import com.example.century22.bo.Status;
 import com.example.century22.bo.Type;
 
 import java.util.List;
@@ -17,6 +18,9 @@ public interface TypeDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addType(Type type);
+
+    @Query("SELECT * FROM Type WHERE id = :id")
+    Type getType(int id);
 
     @Query("Delete FROM Type")
     void del();

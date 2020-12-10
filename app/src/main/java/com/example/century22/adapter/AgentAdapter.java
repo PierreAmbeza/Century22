@@ -14,11 +14,10 @@ import java.util.List;
 import android.content.Intent;
 import android.view.View.OnClickListener;
 
-import com.example.century22.repository.AppRepository;
-import com.example.century22.view.ProfileActivity;
 import com.example.century22.R;
 import com.example.century22.bo.Agent;
 import com.example.century22.preferences.AppPreferences;
+import com.example.century22.view.PropertiesActivity;
 
 
 public final class AgentAdapter
@@ -60,8 +59,8 @@ public final class AgentAdapter
                     //We create the intent that display the UserDetailActivity.
                     //The current user is added as an extra
                     //The User class implement the "Serializable" interface so I can put the whole object as an extra
-                    AppPreferences.saveAgentLogin(itemView.getContext(), agent.name + " " + agent.lastname);
-                    final Intent intent = new Intent(itemView.getContext(), ProfileActivity.class);
+                    AppPreferences.saveAgentLogin(itemView.getContext(), agent.name , agent.lastname);
+                    final Intent intent = new Intent(itemView.getContext(), PropertiesActivity.class);
                     itemView.getContext().startActivity(intent);
                 }
 
