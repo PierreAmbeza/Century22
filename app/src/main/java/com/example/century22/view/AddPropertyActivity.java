@@ -7,7 +7,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +25,7 @@ import com.example.century22.viewmodel.AddPropertyActivityViewModel.Event;
 
 final public class AddPropertyActivity
         extends AppCompatActivity
-        implements OnClickListener
-{
+        implements OnClickListener, AdapterView.OnItemSelectedListener {
 
     //The tag used into this screen for the logs
     public static final String TAG = AddPropertyActivity.class.getSimpleName();
@@ -38,6 +40,8 @@ final public class AddPropertyActivity
 
     private EditText address;
 
+    private String type;
+
     private AddPropertyActivityViewModel viewModel;
 
     @Override
@@ -45,6 +49,7 @@ final public class AddPropertyActivity
     {
         super.onCreate(savedInstanceState);
 
+        viewModel = new ViewModelProvider(this).get(AddPropertyActivityViewModel.class);
         //We first set up the layout linked to the activity
         setContentView(R.layout.activity_add_property);
 
@@ -54,11 +59,15 @@ final public class AddPropertyActivity
         address = findViewById(R.id.address);
         description = findViewById(R.id.description);
         area = findViewById(R.id.area);
+        Spinner spin = findViewById(R.id.type);
+        spin.setOnItemSelectedListener(this);
 
         //We configure the click on the save button
         findViewById(R.id.add_property).setOnClickListener(this);
-
-        viewModel = new ViewModelProvider(this).get(AddPropertyActivityViewModel.class);
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,viewModel.getTypes());
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spin.setAdapter(aa);
 
         observeEvent();
     }
@@ -92,14 +101,14 @@ final public class AddPropertyActivity
     public void onClick(View v)
     {
         //we first retrieve user's entries
-        final int _price = Integer.parseInt(price.getEditableText().toString());
-        final int _rooms = Integer.parseInt(rooms.getEditableText().toString());
-        final int _area = Integer.parseInt(area.getEditableText().toString());
+        final String _price = price.getEditableText().toString();
+        final String _rooms = rooms.getEditableText().toString();
+        final String _area = area.getEditableText().toString();
         //final int type = Integer.
         final String _address = address.getEditableText().toString();
         final String _description = description.getEditableText().toString();
 
-        viewModel.saveProperty(_price, _area, _rooms,1, _description, _address);
+        viewModel.saveProperty(_price, _area, _rooms,type, _description, _address);
     }
 
     private void displayNotification()
@@ -136,4 +145,14 @@ final public class AddPropertyActivity
         description.setText(null);
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        type = viewModel.getTypes()[position];
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        displayError();
+    }
 }

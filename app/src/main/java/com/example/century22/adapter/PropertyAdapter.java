@@ -61,15 +61,15 @@ public final class PropertyAdapter
         public void update(final Property property)
         {
             //We update the UI binding the current user to the current item
-            String _type = AppRepository.getInstance(itemView.getContext()).getType(property.type).type.toLowerCase();
+            String _type = AppRepository.getInstance(itemView.getContext()).getType(property.type).type;
             int imageResource = itemView.getContext().getResources()
                     .getIdentifier("@drawable/ic_" + _type, null, itemView.getContext().getPackageName());
             image.setImageResource(imageResource);
             type.setText(_type);
             description.setText(property.description);
             status.setText(AppRepository.getInstance(itemView.getContext()).getStatus(property.status).status);
-            area.setText(Integer.toString(property.surface));
-            price.setText(Integer.toString(property.price));
+            area.setText(Integer.toString(property.surface) + "m2");
+            price.setText(Integer.toString(property.price) + "€");
             //We handle the click on the current item in order to display a new activity
             itemView.setOnClickListener(new OnClickListener()
             {

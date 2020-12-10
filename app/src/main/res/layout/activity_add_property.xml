@@ -34,6 +34,29 @@
         />
 
     -->
+
+    <TextView
+        android:id="@+id/type_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/type"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Type : "
+        android:textStyle=""
+        android:textSize="18sp"
+        />
+
+    <Spinner
+        android:id="@+id/type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/type_label"
+        app:layout_constraintTop_toTopOf="@id/type_label"
+        />
+
     <!--
     * We use the hint attribute to display the "Phone Number" string
     * The type string has been extracted into a dedicated file
@@ -50,9 +73,9 @@
         android:hint="@string/price"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@id/address"
+        app:layout_constraintTop_toBottomOf="@id/type"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         />
     <!--
     * We use the hint attribute to display the "Address" string

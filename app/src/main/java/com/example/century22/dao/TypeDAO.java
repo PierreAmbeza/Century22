@@ -22,6 +22,9 @@ public interface TypeDAO {
     @Query("SELECT * FROM Type WHERE id = :id")
     Type getType(int id);
 
+    @Query("SELECT * FROM Type WHERE type = :type")
+    Type getTypeByName(String type);
+
     @Query("Delete FROM Type")
     void del();
 

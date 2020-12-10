@@ -48,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/area"
         app:layout_constraintStart_toStartOf="@id/description"
         app:layout_constraintTop_toBottomOf="@id/description"
         tools:text="@tools:sample/lorem"
@@ -62,6 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/type"
         app:layout_constraintTop_toTopOf="parent"
+        android:gravity="right"
         tools:text="@tools:sample/lorem"
         />
 
@@ -69,13 +70,12 @@
         android:id="@+id/area"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/status"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintTop_toTopOf="@id/status"
+        app:layout_constraintStart_toEndOf="@id/status"
+        android:gravity="right"
         tools:text="@tools:sample/lorem"
         />
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

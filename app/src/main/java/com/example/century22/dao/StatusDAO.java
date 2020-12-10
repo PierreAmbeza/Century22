@@ -21,6 +21,9 @@ public interface StatusDAO {
     @Query("SELECT * FROM Status WHERE id = :id")
     Status getStatus(int id);
 
+    @Query("SELECT * FROM Status WHERE status = :status")
+    Status getStatusByName(String status);
+
     @Query("Delete FROM Status")
     void del();
 

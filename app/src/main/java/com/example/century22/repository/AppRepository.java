@@ -77,8 +77,7 @@ public class AppRepository {
 
 
 
-    public List<Agent> getAgents() { return appdatabase.agentDao().getAllAgents();
-    }
+    public List<Agent> getAgents() { return appdatabase.agentDao().getAllAgents(); }
 
     public void addAgent(Agent agent) { appdatabase.agentDao().addAgent(agent); }
 
@@ -99,6 +98,8 @@ public class AppRepository {
 
     public Type getType(int id){ return appdatabase.typeDAO().getType(id); }
 
+    public Type getTypeByName(String type){ return appdatabase.typeDAO().getTypeByName(type);}
+
     public void addType(Type type) { appdatabase.typeDAO().addType(type); }
 
     public void deleteTypes(){ appdatabase.typeDAO().del(); }
@@ -106,6 +107,8 @@ public class AppRepository {
     public List<Status> getStatus() { return appdatabase.statusDAO().getAllStatus(); }
 
     public Status getStatus(int id){ return appdatabase.statusDAO().getStatus(id); }
+
+    public Status getStatusByName(String status){ return appdatabase.statusDAO().getStatusByName(status);}
 
     public void addStatus(Status status) { appdatabase.statusDAO().addStatus(status); }
 
