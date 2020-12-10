@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  As recommended by Google, we use a ConstraintLayout
+  as the root element
+  We add a padding all around using the padding attribute
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    >
+
+    <!--
+    * We use the hint attribute to display the "type" string
+    * The type string has been extracted into a dedicated file
+    * The width is "0dp" because the "match_parent" value cannot be
+    used with the constraintLayout
+    * We use the inputType attribute to display the best keyboard
+    to the user
+    *
+    -->
+    <!--
+    <AutoCompleteTextView
+        android:id="@+id/type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/type"
+        app:layout_constraintBottom_toTopOf="@id/price"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    -->
+    <!--
+    * We use the hint attribute to display the "Phone Number" string
+    * The type string has been extracted into a dedicated file
+    * The width is "0dp" because the "match_parent" value cannot be
+    used with the constraintLayout
+    * We use the inputType attribute to display the best keyboard
+    to the user
+    *
+    -->
+    <EditText
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/price"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/address"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <!--
+    * We use the hint attribute to display the "Address" string
+    * The type string has been extracted into a dedicated file
+    * The width is "0dp" because the "match_parent" value cannot be
+    used with the constraintLayout
+    * We use the inputType attribute to display the best keyboard
+    to the user
+    *
+    -->
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/address"
+        android:inputType="textPostalAddress"
+        app:layout_constraintBottom_toTopOf="@id/area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price"
+        />
+
+    <EditText
+        android:id="@+id/area"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/area"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/rooms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        />
+
+    <EditText
+        android:id="@+id/rooms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/rooms"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/area"
+        />
+
+    <!--
+    * We use the hint attribute to display the "description me" string
+    * The type string has been extracted into a dedicated file
+    * The width is "0dp" because the "match_parent" value cannot be
+    used with the constraintLayout
+    * We use the inputType attribute to display the best keyboard
+    to the user
+    *
+    -->
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:minLines="4"
+        app:layout_constraintBottom_toTopOf="@id/add_property"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/address"
+        />
+
+    <!--
+    * We use the backgroundTint attribute to change the default color
+    of the button
+    -->
+    <Button
+        android:id="@+id/add_property"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/add_property"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/description"
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
