@@ -18,8 +18,6 @@ public interface StatusDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addStatus(Status status);
 
-    @Query("SELECT * FROM Status WHERE id = :id")
-    Status getStatus(int id);
 
     @Query("SELECT * FROM Status WHERE status = :status")
     Status getStatusByName(String status);

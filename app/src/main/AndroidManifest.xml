@@ -37,6 +37,9 @@
             android:name=".view.AddPropertyActivity"
             android:parentActivityName=".view.PropertiesActivity"
             />
+        <activity
+            android:name=".view.PropertyDetailActivity"
+            android:parentActivityName=".view.PropertiesActivity"
+            />
     </application>
-
 </manifest>

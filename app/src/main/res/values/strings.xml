@@ -9,4 +9,5 @@
     <string name="type">Type</string>
     <string name="added_property">New property added!</string>
     <string name="cannot_add_property">Cannot add the property</string>
+    <string name="logout">Log out</string>
 </resources>

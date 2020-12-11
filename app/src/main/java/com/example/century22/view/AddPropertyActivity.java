@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.Observer;
@@ -24,7 +23,7 @@ import com.example.century22.viewmodel.AddPropertyActivityViewModel;
 import com.example.century22.viewmodel.AddPropertyActivityViewModel.Event;
 
 final public class AddPropertyActivity
-        extends AppCompatActivity
+        extends MenuActivity
         implements OnClickListener, AdapterView.OnItemSelectedListener {
 
     //The tag used into this screen for the logs
@@ -39,6 +38,8 @@ final public class AddPropertyActivity
     private EditText description;
 
     private EditText address;
+
+    private Spinner spin;
 
     private String type;
 
@@ -59,17 +60,21 @@ final public class AddPropertyActivity
         address = findViewById(R.id.address);
         description = findViewById(R.id.description);
         area = findViewById(R.id.area);
-        Spinner spin = findViewById(R.id.type);
+        spin = findViewById(R.id.type);
         spin.setOnItemSelectedListener(this);
 
         //We configure the click on the save button
         findViewById(R.id.add_property).setOnClickListener(this);
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,viewModel.getTypes());
+        setSpinner();
+
+        observeEvent();
+    }
+
+    private void setSpinner(){
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,viewModel.getTypes());
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);
-
-        observeEvent();
     }
 
     private void observeEvent()
@@ -104,11 +109,10 @@ final public class AddPropertyActivity
         final String _price = price.getEditableText().toString();
         final String _rooms = rooms.getEditableText().toString();
         final String _area = area.getEditableText().toString();
-        //final int type = Integer.
         final String _address = address.getEditableText().toString();
         final String _description = description.getEditableText().toString();
 
-        viewModel.saveProperty(_price, _area, _rooms,type, _description, _address);
+        viewModel.saveProperty(_price, _area, _rooms, type, _description, _address);
     }
 
     private void displayNotification()

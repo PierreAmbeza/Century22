@@ -12,7 +12,7 @@ import android.view.View.OnClickListener;
 import com.example.century22.R;
 import com.example.century22.preferences.AppPreferences;
 
-public class ProfileActivity extends AppCompatActivity implements OnClickListener {
+public class ProfileActivity extends MenuActivity implements OnClickListener {
 
     private TextView name;
 

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -22,7 +21,7 @@ import com.example.century22.bo.Property;
 import com.example.century22.viewmodel.PropertiesActivityViewModel;
 
 final public class PropertiesActivity
-        extends AppCompatActivity
+        extends MenuActivity
         implements OnClickListener
 {
 
@@ -50,7 +49,6 @@ final public class PropertiesActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
         //We first set up the layout linked to the activity
         setContentView(R.layout.properties_activity);
 
@@ -72,35 +70,6 @@ final public class PropertiesActivity
         //so the list is updated each time the screen goes to foreground
         viewModel.loadProperties();
     }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        //We add the "menu_order" to the current activity
-        getMenuInflater().inflate(R.menu.menu_order, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item)
-    {
-        //We handle the click on a menu item
-        if (item.getItemId() == R.id.order)
-        {
-            viewModel.updateOrder(OrderState.Order);
-        }
-        else if (item.getItemId() == R.id.noOrder)
-        {
-            viewModel.updateOrder(OrderState.NotOrder);
-        }
-        else if (item.getItemId() == R.id.profile)
-        {
-            final Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void onClick(View v)

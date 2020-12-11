@@ -12,13 +12,11 @@ public abstract class AppPreferences {
 
     private static final String LOGIN_PREFERENCES_KEY = "loginPreferencesKey";
 
-    public static void saveAgentLogin(@NonNull Context context, @NonNull String name, @NonNull String lastname)
+    public static void saveAgentLogin(@NonNull Context context, @NonNull String name)
     {
         final SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         final Editor editor = defaultSharedPreferences.edit();
-        editor.putString(AppPreferences.LOGIN_PREFERENCES_KEY + "name", name);
-        editor.apply();
-        editor.putString(AppPreferences.LOGIN_PREFERENCES_KEY + "lastname", lastname);
+        editor.putString(AppPreferences.LOGIN_PREFERENCES_KEY, name);
         editor.apply();
     }
 
@@ -26,14 +24,16 @@ public abstract class AppPreferences {
     public static String getAgentName(@NonNull Context context)
     {
         final SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return defaultSharedPreferences.getString(AppPreferences.LOGIN_PREFERENCES_KEY+"name", null);
+        return defaultSharedPreferences.getString(AppPreferences.LOGIN_PREFERENCES_KEY, null);
     }
 
-    @Nullable
-    public static String getAgentLastName(@NonNull Context context)
+    public static void removeLogin(@NonNull Context context)
     {
         final SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return defaultSharedPreferences.getString(AppPreferences.LOGIN_PREFERENCES_KEY+"lastname", null);
+        final Editor editor = defaultSharedPreferences.edit();
+        editor.remove(AppPreferences.LOGIN_PREFERENCES_KEY + "name");
+        editor.apply();
+
     }
 
     private AppPreferences() {

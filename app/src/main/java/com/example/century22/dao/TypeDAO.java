@@ -19,9 +19,6 @@ public interface TypeDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addType(Type type);
 
-    @Query("SELECT * FROM Type WHERE id = :id")
-    Type getType(int id);
-
     @Query("SELECT * FROM Type WHERE type = :type")
     Type getTypeByName(String type);
 

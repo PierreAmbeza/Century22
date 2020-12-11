@@ -32,22 +32,17 @@ public final class AgentAdapter
 
         private final TextView name;
 
-        private final TextView lastname;
-
         public AgentViewHolder(@NonNull View itemView)
         {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
-            lastname = itemView.findViewById(R.id.lastname);
-
         }
 
         public void update(final Agent agent)
         {
             //We update the UI binding the current user to the current item
             name.setText(agent.name);
-            lastname.setText(agent.lastname);
 
             //We handle the click on the current item in order to display a new activity
             itemView.setOnClickListener(new OnClickListener()
@@ -59,7 +54,7 @@ public final class AgentAdapter
                     //We create the intent that display the UserDetailActivity.
                     //The current user is added as an extra
                     //The User class implement the "Serializable" interface so I can put the whole object as an extra
-                    AppPreferences.saveAgentLogin(itemView.getContext(), agent.name , agent.lastname);
+                    AppPreferences.saveAgentLogin(itemView.getContext(), agent.name);
                     final Intent intent = new Intent(itemView.getContext(), PropertiesActivity.class);
                     itemView.getContext().startActivity(intent);
                 }

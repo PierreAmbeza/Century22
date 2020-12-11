@@ -23,6 +23,7 @@ import com.example.century22.view.ProfileActivity;
 import com.example.century22.R;
 import com.example.century22.bo.Agent;
 import com.example.century22.preferences.AppPreferences;
+import com.example.century22.view.PropertyDetailActivity;
 import com.google.gson.internal.$Gson$Preconditions;
 
 
@@ -61,15 +62,14 @@ public final class PropertyAdapter
         public void update(final Property property)
         {
             //We update the UI binding the current user to the current item
-            String _type = AppRepository.getInstance(itemView.getContext()).getType(property.type).type;
             int imageResource = itemView.getContext().getResources()
-                    .getIdentifier("@drawable/ic_" + _type, null, itemView.getContext().getPackageName());
+                    .getIdentifier("@drawable/ic_"+ property.type.toLowerCase(), null, itemView.getContext().getPackageName());
             image.setImageResource(imageResource);
-            type.setText(_type);
+            type.setText(property.type);
             description.setText(property.description);
-            status.setText(AppRepository.getInstance(itemView.getContext()).getStatus(property.status).status);
-            area.setText(Integer.toString(property.surface) + "m2");
-            price.setText(Integer.toString(property.price) + "€");
+            status.setText(property.status);
+            area.setText(property.surface + "m2");
+            price.setText(property.price + "€");
             //We handle the click on the current item in order to display a new activity
             itemView.setOnClickListener(new OnClickListener()
             {
@@ -80,7 +80,8 @@ public final class PropertyAdapter
                     //We create the intent that display the UserDetailActivity.
                     //The current user is added as an extra
                     //The User class implement the "Serializable" interface so I can put the whole object as an extra
-                    final Intent intent = new Intent(itemView.getContext(), ProfileActivity.class);
+                    final Intent intent = new Intent(itemView.getContext(), PropertyDetailActivity.class);
+                    intent.putExtra(PropertyDetailActivity.PROPERTY_EXTRA, property);
                     itemView.getContext().startActivity(intent);
                 }
 

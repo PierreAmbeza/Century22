@@ -11,20 +11,14 @@ import java.io.Serializable;
 public class Agent implements Serializable
 {
 
-    //This class is used in order to sort a user
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "id")
-    public int id;
-
-    public final String name;
-
-    public final String lastname;
+    @PrimaryKey
+    @ColumnInfo(name = "Name")
+    public final @NonNull String name;
 
 
-    public Agent(@NonNull String name, @NonNull String lastname)
+    public Agent(@NonNull String name)
     {
         this.name = name;
-        this.lastname = lastname;
     }
 
  }

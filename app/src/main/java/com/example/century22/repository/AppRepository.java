@@ -2,6 +2,7 @@ package com.example.century22.repository;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.OnConflictStrategy;
 import androidx.room.Room;
@@ -20,7 +21,7 @@ public class AppRepository {
 
     private static volatile AppRepository instance;
 
-    private final String[][] agentsNames = {{"Bob", "Dufour"}, {"Denis", "McQuaid"}};
+    private final String[] agentsNames = {"Bob Dufour", "Denis McQuaid"};
 
     private final String[] status = { "Not sold", "Sold"};
 
@@ -54,8 +55,7 @@ public class AppRepository {
 
                 ContentValues contentValues = new ContentValues();
                 for(int i = 0; i < agentsNames.length; i++) {
-                    contentValues.put("name", agentsNames[i][0]);
-                    contentValues.put("lastname", agentsNames[i][1]);
+                    contentValues.put("Name", agentsNames[i]);
                     db.insert("Agent", OnConflictStrategy.REPLACE, contentValues);
                 }
                 ContentValues cv = new ContentValues();
@@ -72,7 +72,6 @@ public class AppRepository {
         };
         appdatabase = Room.databaseBuilder(context, AppDatabase.class, "app-database").addCallback(rdc).allowMainThreadQueries().build();
         //context.deleteDatabase("app-database");
-
     }
 
 
@@ -81,7 +80,7 @@ public class AppRepository {
 
     public void addAgent(Agent agent) { appdatabase.agentDao().addAgent(agent); }
 
-    public Agent getAgentByName(String name, String lastname){ return appdatabase.agentDao().getAgentByName(name, lastname); }
+    public Agent getAgentByName(String name){ return appdatabase.agentDao().getAgentByName(name); }
 
     public void deleteAgents(){ appdatabase.agentDao().del(); }
 
@@ -96,8 +95,6 @@ public class AppRepository {
 
     public List<Type> getTypes() { return appdatabase.typeDAO().getAllTypes(); }
 
-    public Type getType(int id){ return appdatabase.typeDAO().getType(id); }
-
     public Type getTypeByName(String type){ return appdatabase.typeDAO().getTypeByName(type);}
 
     public void addType(Type type) { appdatabase.typeDAO().addType(type); }
@@ -105,8 +102,6 @@ public class AppRepository {
     public void deleteTypes(){ appdatabase.typeDAO().del(); }
 
     public List<Status> getStatus() { return appdatabase.statusDAO().getAllStatus(); }
-
-    public Status getStatus(int id){ return appdatabase.statusDAO().getStatus(id); }
 
     public Status getStatusByName(String status){ return appdatabase.statusDAO().getStatusByName(status);}
 

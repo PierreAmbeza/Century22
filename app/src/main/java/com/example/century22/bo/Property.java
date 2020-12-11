@@ -14,17 +14,17 @@ import java.util.Date;
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = Agent.class,
-                parentColumns = "id",
+                parentColumns = "Name",
                 childColumns = "Agent"
         ),
         @ForeignKey(
                 entity = Status.class,
-                parentColumns = "id",
+                parentColumns = "Status",
                 childColumns = "Status"
         ),
         @ForeignKey(
                 entity = Type.class,
-                parentColumns = "id",
+                parentColumns = "Type",
                 childColumns = "Type"
         )
 })
@@ -33,14 +33,14 @@ public class Property implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public int id;
 
-    public final int price;
+    public final String price;
 
-    public final int surface;
+    public final String surface;
 
-    public final int rooms;
+    public final String rooms;
 
     @ColumnInfo(name = "Type")
-    public final int type;
+    public final String type;
 
     public final String description;
 
@@ -51,17 +51,17 @@ public class Property implements Serializable {
     public final double longitude;
 
     @ColumnInfo(name = "Status")
-    public final int status;
+    public final String status;
 
     @ColumnInfo(name = "Agent")
-    public final int agent;
+    public final String agent;
 
     public final Date add_date;
 
     public final Date last_edit_date;
 
 
-    public Property(@NonNull int price, @NonNull int surface, @NonNull int rooms, @NonNull int type, @NonNull String description, @NonNull String address, @NonNull double latitute, @NonNull double longitude, @NonNull int status, @NonNull int agent, @NonNull Date add_date, @NonNull Date last_edit_date) {
+    public Property(@NonNull String price, @NonNull String surface, @NonNull String rooms, @NonNull String type, @NonNull String description, @NonNull String address, double latitute, double longitude, @NonNull String status, @NonNull String agent, @NonNull Date add_date, @NonNull Date last_edit_date) {
         this.price = price;
         this.surface = surface;
         this.rooms = rooms;

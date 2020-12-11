@@ -10,12 +10,9 @@ import java.io.Serializable;
 @Entity
 public class Status implements Serializable {
 
-    //This class is used in order to sort a user
-    @PrimaryKey(autoGenerate = true)
-    public int id;
-
+    @PrimaryKey
     @ColumnInfo(name = "Status")
-    public final String status;
+    public final @NonNull String status;
 
     public Status(@NonNull String status)
     {

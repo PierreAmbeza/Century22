@@ -15,8 +15,8 @@ public interface AgentDao {
     @Query("SELECT * FROM Agent")
     List<Agent> getAllAgents();
 
-    @Query("SELECT * FROM Agent WHERE name = :name AND lastname = :lastname")
-    Agent getAgentByName(String name, String lastname);
+    @Query("SELECT * FROM Agent WHERE name = :name ")
+    Agent getAgentByName(String name);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addAgent(Agent agent);
