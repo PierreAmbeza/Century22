@@ -91,7 +91,7 @@ public class AppRepository {
         appdatabase.propertyDao().addProperty(property);
     }
 
-    public void deleteProperties(){ appdatabase.propertyDao().del(); }
+    public void deleteProperty(Property property){ appdatabase.propertyDao().del(property); }
 
     public List<Type> getTypes() { return appdatabase.typeDAO().getAllTypes(); }
 

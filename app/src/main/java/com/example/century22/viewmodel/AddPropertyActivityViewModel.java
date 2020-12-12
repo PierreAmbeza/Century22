@@ -54,7 +54,7 @@ public final class AddPropertyActivityViewModel
         boolean canAddProperty = checkFormEntries(price, surface, rooms, type, description, address) && checkIfExists(address);
         if (canAddProperty) {
             //We add the property to the list and we reset the form
-            persistUser(price, surface, rooms, type, description, address);
+            persistProperty(price, surface, rooms, type, description, address);
             event.postValue(Event.ResetForm);
         } else {
             //we display a log error and a Toast
@@ -62,7 +62,7 @@ public final class AddPropertyActivityViewModel
         }
     }
 
-    private void persistUser(String price, String surface, String rooms, String type, String description, String address) {
+    private void persistProperty(String price, String surface, String rooms, String type, String description, String address) {
         Geocoder geocoder = new Geocoder(getApplication());
         List<Address> l;
         String name = AppPreferences.getAgentName(getApplication());

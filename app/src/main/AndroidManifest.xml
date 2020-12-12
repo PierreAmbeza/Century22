@@ -22,17 +22,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.ProfileActivity"
-            android:parentActivityName=".view.AgentsActivity"
-            />
-        <activity
             android:name=".view.GoogleMapsActivity"
-            android:parentActivityName=".view.ProfileActivity"
             />
         <activity
-            android:name=".view.PropertiesActivity"
-            android:parentActivityName=".view.AgentsActivity"
-            />
+            android:name=".view.PropertiesActivity"/>
+            <!--android:parentActivityName=".view.AgentsActivity"
+            />-->
         <activity
             android:name=".view.AddPropertyActivity"
             android:parentActivityName=".view.PropertiesActivity"

@@ -18,7 +18,7 @@ public interface PropertyDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addProperty(Property property);
 
-    @Query("Delete FROM Property")
-    void del();
+    @Delete
+    void del(Property property);
 
 }

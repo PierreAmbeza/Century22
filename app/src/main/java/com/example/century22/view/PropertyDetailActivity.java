@@ -1,9 +1,19 @@
 package com.example.century22.view;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.lifecycle.AbstractSavedStateViewModelFactory;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,10 +21,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.century22.R;
 import com.example.century22.bo.Agent;
 import com.example.century22.bo.Property;
-import com.example.century22.repository.AppRepository;
+import com.example.century22.viewmodel.AddPropertyActivityViewModel;
 import com.example.century22.viewmodel.PropertyDetailActivityViewModel;
-
-import java.util.Date;
+import com.example.century22.viewmodel.PropertyDetailActivityViewModel.Event;
 
 public class PropertyDetailActivity extends MenuActivity{
 
@@ -44,6 +53,8 @@ public class PropertyDetailActivity extends MenuActivity{
 
     private PropertyDetailActivityViewModel viewModel;
 
+    private String _address;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,10 +74,50 @@ public class PropertyDetailActivity extends MenuActivity{
         creation = findViewById(R.id.creation);
         update = findViewById(R.id.update);
         address = findViewById(R.id.address);
-
         viewModel = new ViewModelProvider(this, new SavedStateViewModelFactory(getApplication(), this, getIntent().getExtras())).get(PropertyDetailActivityViewModel.class);
-
+        observeEvent();
         observeProperty();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        menu.findItem(R.id.delete).setVisible(true);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId() == R.id.delete)
+        {
+            viewModel.deleteProperty();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void displayNotification()
+    {
+        final NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        final String notificationChannelId = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O ? "MyChannel" : null;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+        {
+            final NotificationChannel notificationChannel = new NotificationChannel(notificationChannelId, "My Channel", NotificationManager.IMPORTANCE_HIGH);
+            notificationManagerCompat.createNotificationChannel(notificationChannel);
+        }
+
+        final Intent intent = new Intent(PropertyDetailActivity.this, AddPropertyActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity( PropertyDetailActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        final NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(PropertyDetailActivity.this, notificationChannelId);
+        notificationBuilder.setContentTitle("Deleted property:");
+        notificationBuilder.setContentText("Location:" +_address);
+        notificationBuilder.setSmallIcon(R.drawable.ic_house);
+        notificationBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        notificationBuilder.setAutoCancel(true);
+        notificationBuilder.setChannelId(notificationChannelId);
+        notificationBuilder.setContentIntent(pendingIntent);
+        notificationManagerCompat.notify(2, notificationBuilder.build());
     }
 
     private void observeProperty()
@@ -87,6 +138,31 @@ public class PropertyDetailActivity extends MenuActivity{
                 creation.setText(property.add_date.toString());
                 update.setText(property.last_edit_date.toString());
                 address.setText(property.address);
+                _address = property.address;
+            }
+        });
+    }
+
+    private void displayError()
+    {
+        Toast.makeText(this, "Only property's agent can delete it", Toast.LENGTH_SHORT).show();
+    }
+
+    private void observeEvent()
+    {
+        viewModel.event.observe(this, new Observer<Event>() {
+            @Override
+            public void onChanged(Event event) {
+
+                if (event == Event.Ok)
+                {
+                    displayNotification();
+                    onBackPressed();
+                }
+                else if (event == Event.Ko)
+                {
+                    displayError();
+                }
             }
         });
     }

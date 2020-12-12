@@ -5,22 +5,15 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.century22.R;
 import com.example.century22.adapter.AgentAdapter;
 import com.example.century22.bo.Agent;
-import com.example.century22.bo.Property;
-import com.example.century22.bo.Status;
-import com.example.century22.bo.Type;
-import com.example.century22.repository.AppRepository;
-import androidx.lifecycle.Observer;
+
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.century22.viewmodel.AgentsActivityViewModel;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 final public class AgentsActivity
@@ -62,6 +55,11 @@ final public class AgentsActivity
             final Intent intent = new Intent(this, ProfileActivity.class);
             startActivity(intent);
         }*/
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void initList()

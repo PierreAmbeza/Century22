@@ -10,7 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.century22.R;
+import com.example.century22.bo.Property;
 import com.example.century22.preferences.AppPreferences;
+import com.example.century22.repository.AppRepository;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -32,7 +34,6 @@ public class MenuActivity extends AppCompatActivity {
             final Intent intent = new Intent(this, AgentsActivity.class);
             startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

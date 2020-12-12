@@ -25,19 +25,6 @@ final public class PropertiesActivity
         implements OnClickListener
 {
 
-    /*
-
-    AutoCompleteTextView type;
-    String[] types = new String[]{"House", "Flat", "Office"};
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_property);
-        type = findViewById(R.id.type);
-        type.setAdapter(new ArrayAdapter<String>(PropertyActivity.this, android.R.layout.simple_list_item_activated_1, types));
-    }
-     */
-
     //The tag used into this screen for the logs
     public static final String TAG = PropertiesActivity.class.getSimpleName();
 

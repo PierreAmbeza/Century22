@@ -1,7 +1,5 @@
 package com.example.century22.adapter;
 
-import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +16,8 @@ import android.content.Intent;
 import android.view.View.OnClickListener;
 
 import com.example.century22.bo.Property;
-import com.example.century22.repository.AppRepository;
-import com.example.century22.view.ProfileActivity;
 import com.example.century22.R;
-import com.example.century22.bo.Agent;
-import com.example.century22.preferences.AppPreferences;
 import com.example.century22.view.PropertyDetailActivity;
-import com.google.gson.internal.$Gson$Preconditions;
 
 
 public final class PropertyAdapter
