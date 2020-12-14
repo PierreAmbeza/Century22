@@ -49,7 +49,7 @@ public class EditPropertyActivity extends MenuActivity
 
         viewModel = new ViewModelProvider(this, new SavedStateViewModelFactory(getApplication(), this, getIntent().getExtras())).get(EditPropertyActivityViewModel.class);
         //We first set up the layout linked to the activity
-        setContentView(R.layout.activity_add_property);
+        setContentView(R.layout.activity_edit_property);
 
         //Then we retrieved the widget we will need to manipulate into the
         price = findViewById(R.id.price);
@@ -57,11 +57,11 @@ public class EditPropertyActivity extends MenuActivity
         address = findViewById(R.id.address);
         description = findViewById(R.id.description);
         area = findViewById(R.id.area);
-        spin = findViewById(R.id.type);
+        spin = findViewById(R.id.status);
         spin.setOnItemSelectedListener(this);
 
         //We configure the click on the save button
-        findViewById(R.id.add_property).setOnClickListener(this);
+        findViewById(R.id.edit_property).setOnClickListener(this);
         setSpinner();
         observeProperty();
         observeEvent();

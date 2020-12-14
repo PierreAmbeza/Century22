@@ -57,8 +57,8 @@ public final class AddPropertyActivityViewModel
         Log.d(AddPropertyActivityViewModel.class.getSimpleName(), name);
         try {
             l = geocoder.getFromLocationName(address, 1);
-            Double latitude = l.get(0).getLatitude();
-            Double longitude = l.get(0).getLongitude();
+            double latitude = l.get(0).getLatitude();
+            double longitude = l.get(0).getLongitude();
             Date d = Calendar.getInstance().getTime();
             AppRepository.getInstance(getApplication()).addProperty(new Property(price, surface,
                     rooms, type, description, address, latitude, longitude, "Not sold", name, d, d));

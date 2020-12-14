@@ -26,8 +26,8 @@
             />
         <activity
             android:name=".view.PropertiesActivity"/>
-            <!--android:parentActivityName=".view.AgentsActivity"
-            />-->
+        <!--android:parentActivityName=".view.AgentsActivity"
+        />-->
         <activity
             android:name=".view.AddPropertyActivity"
             android:parentActivityName=".view.PropertiesActivity"
