@@ -76,13 +76,21 @@ public class PropertyDetailActivity extends MenuActivity{
         address = findViewById(R.id.address);
         viewModel = new ViewModelProvider(this, new SavedStateViewModelFactory(getApplication(), this, getIntent().getExtras())).get(PropertyDetailActivityViewModel.class);
         observeEvent();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.loadProperty();
         observeProperty();
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.delete).setVisible(true);
+        menu.findItem(R.id.edit).setVisible(true);
         return true;
     }
 
@@ -91,6 +99,12 @@ public class PropertyDetailActivity extends MenuActivity{
         if(item.getItemId() == R.id.delete)
         {
             viewModel.deleteProperty();
+        }
+        else if(item.getItemId() == R.id.edit)
+        {
+            final Intent intent = new Intent(this, EditPropertyActivity.class);
+            intent.putExtra(PropertyDetailActivity.PROPERTY_EXTRA, viewModel.property.getValue());
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }

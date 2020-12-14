@@ -13,4 +13,17 @@
         app:showAsAction="never"
         android:visible="false"
         />
+    <item
+        android:id="@+id/edit"
+        android:title="Edit"
+        app:showAsAction="never"
+        android:visible="false"
+        />
+    <item
+        android:id="@+id/gmaps"
+        android:icon="@drawable/ic_map"
+        android:title="View on map"
+        app:showAsAction="ifRoom|withText"
+        android:visible="false"
+        />
 </menu>

@@ -15,6 +15,7 @@ import com.example.century22.bo.Property;
 import com.example.century22.bo.Status;
 import com.example.century22.bo.Type;
 
+import java.util.Date;
 import java.util.List;
 
 public class AppRepository {
@@ -90,6 +91,14 @@ public class AppRepository {
     {
         appdatabase.propertyDao().addProperty(property);
     }
+
+    public void updateProperty(String price, String rooms, String surface, String address, Date edit, String description,
+                               double latitude, double longitude, String status, int id)
+    {
+        appdatabase.propertyDao().updateProperty(price,rooms, address, surface, edit, description, latitude, longitude, status, id);
+    }
+
+    public Property getProperty(int id){ return appdatabase.propertyDao().getProperty(id);}
 
     public void deleteProperty(Property property){ appdatabase.propertyDao().del(property); }
 

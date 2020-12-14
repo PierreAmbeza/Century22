@@ -1,30 +1,18 @@
 package com.example.century22.viewmodel;
 
 import android.app.Application;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-
-import com.example.century22.R;
-import com.example.century22.bo.Agent;
 import com.example.century22.bo.Property;
-import com.example.century22.bo.Type;
 import com.example.century22.preferences.AppPreferences;
 import com.example.century22.repository.AppRepository;
 import com.example.century22.view.AddPropertyActivity;
-import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.Calendar;

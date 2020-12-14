@@ -46,4 +46,10 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
             event.postValue(Event.Ko);
         }
     }
+
+    public void loadProperty()
+    {
+        if(property.getValue() != null)
+            property.postValue(AppRepository.getInstance(getApplication()).getProperty(property.getValue().id));
+    }
 }

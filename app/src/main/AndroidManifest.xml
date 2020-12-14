@@ -36,5 +36,9 @@
             android:name=".view.PropertyDetailActivity"
             android:parentActivityName=".view.PropertiesActivity"
             />
+        <activity
+            android:name=".view.EditPropertyActivity"
+            android:parentActivityName=".view.PropertyDetailActivity"
+            />
     </application>
 </manifest>

@@ -23,23 +23,23 @@
     -->
 
     <TextView
-        android:id="@+id/type_label"
-        android:layout_width="wrap_content"
+        android:id="@+id/status_label"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/price"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="Type : "
+        android:text="Status :"
         android:textStyle=""
         android:textSize="18sp"
         />
 
     <Spinner
-        android:id="@+id/type"
+        android:id="@+id/status"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@id/type_label"
-        app:layout_constraintTop_toTopOf="@id/type_label"
+        app:layout_constraintStart_toEndOf="@id/status_label"
+        app:layout_constraintTop_toTopOf="@id/status_label"
         />
 
     <!--
@@ -58,7 +58,7 @@
         android:hint="@string/price"
         android:inputType="number"
         app:layout_constraintBottom_toTopOf="@id/address"
-        app:layout_constraintTop_toBottomOf="@id/type"
+        app:layout_constraintTop_toBottomOf="@id/status"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
@@ -116,30 +116,29 @@
     to the user
     *
     -->
+
+    <!--
+    * We use the backgroundTint attribute to change the default color
+    of the button
+    -->
     <EditText
         android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="@string/description"
         android:inputType="textMultiLine"
-        android:lines="4"
         android:minLines="4"
-        app:layout_constraintBottom_toTopOf="@id/add_property"
+        app:layout_constraintBottom_toTopOf="@id/edit_property"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rooms"
-        />
+        app:layout_constraintTop_toBottomOf="@id/rooms" />
 
-    <!--
-    * We use the backgroundTint attribute to change the default color
-    of the button
-    -->
     <Button
-        android:id="@+id/add_property"
+        android:id="@+id/edit_property"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimary"
-        android:text="@string/add_property"
+        android:text="@string/edit_property"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
