@@ -1,5 +1,9 @@
 package com.example.century22.view;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +12,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
@@ -84,7 +90,7 @@ public class EditPropertyActivity extends MenuActivity
                 if (event == Event.Edited)
                 {
                     displayEdit();
-                    //displayNotification();
+                    displayNotification();
                 }
                 else if (event == Event.Error)
                 {
@@ -139,6 +145,31 @@ public class EditPropertyActivity extends MenuActivity
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         status = viewModel.getStatus()[position];
 
+    }
+
+    private void displayNotification()
+    {
+        final NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        final String notificationChannelId = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O ? "MyChannel" : null;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+        {
+            final NotificationChannel notificationChannel = new NotificationChannel(notificationChannelId, "My Channel", NotificationManager.IMPORTANCE_HIGH);
+            notificationManagerCompat.createNotificationChannel(notificationChannel);
+        }
+
+        final Intent intent = new Intent(EditPropertyActivity.this, EditPropertyActivity.class);
+        final PendingIntent pendingIntent = PendingIntent.getActivity(EditPropertyActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        final NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(EditPropertyActivity.this, notificationChannelId);
+        notificationBuilder.setContentTitle("Edited Property");
+        notificationBuilder.setContentText("Location : " + address.getEditableText().toString());
+        notificationBuilder.setSmallIcon(R.drawable.ic_house);
+        notificationBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
+        notificationBuilder.setAutoCancel(true);
+        notificationBuilder.setChannelId(notificationChannelId);
+        notificationBuilder.setContentIntent(pendingIntent);
+        notificationManagerCompat.notify(1, notificationBuilder.build());
     }
 
     @Override
