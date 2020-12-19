@@ -11,6 +11,7 @@ import androidx.room.PrimaryKey;
 import java.io.Serializable;
 import java.util.Date;
 
+//We define foreign keys for this table
 @Entity(foreignKeys = {
         @ForeignKey(
                 entity = Agent.class,

@@ -12,6 +12,7 @@ public abstract class AppPreferences {
 
     private static final String LOGIN_PREFERENCES_KEY = "loginPreferencesKey";
 
+    /* Method to store the Agent login in preferences*/
     public static void saveAgentLogin(@NonNull Context context, @NonNull String name)
     {
         final SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
@@ -20,6 +21,7 @@ public abstract class AppPreferences {
         editor.apply();
     }
 
+    /* Method to get Agent name from preferences*/
     @Nullable
     public static String getAgentName(@NonNull Context context)
     {
@@ -27,11 +29,12 @@ public abstract class AppPreferences {
         return defaultSharedPreferences.getString(AppPreferences.LOGIN_PREFERENCES_KEY, null);
     }
 
+    /* Method to remove the Agent login in preferences*/
     public static void removeLogin(@NonNull Context context)
     {
         final SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         final Editor editor = defaultSharedPreferences.edit();
-        editor.remove(AppPreferences.LOGIN_PREFERENCES_KEY + "name");
+        editor.remove(AppPreferences.LOGIN_PREFERENCES_KEY);
         editor.apply();
 
     }

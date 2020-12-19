@@ -80,22 +80,18 @@ public class EditPropertyActivity extends MenuActivity
         spin.setAdapter(aa);
     }
 
+    /* Method to choose what to do depending on the Edit event*/
     private void observeEvent()
     {
-        viewModel.event.observe(this, new Observer<Event>()
-        {
-            @Override
-            public void onChanged(EditPropertyActivityViewModel.Event event)
+        viewModel.event.observe(this, event -> {
+            if (event == Event.Edited)//If property has been edited, display a Toast and send notification
             {
-                if (event == Event.Edited)
-                {
-                    displayEdit();
-                    displayNotification();
-                }
-                else if (event == Event.Error)
-                {
-                    displayError();
-                }
+                displayEdit();
+                displayNotification();
+            }
+            else if (event == Event.Error)//Else, display Toast error
+            {
+                displayError();
             }
         });
     }
@@ -110,21 +106,17 @@ public class EditPropertyActivity extends MenuActivity
         Toast.makeText(this, R.string.cannot_add_property, Toast.LENGTH_SHORT).show();
     }
 
+    /* We observe the property variable to set the property's attributes */
     private void observeProperty()
     {
-        viewModel.property.observe(this, new Observer<Property>()
-        {
-            @Override
-            public void onChanged(Property property)
-            {
-                //Then we bind the User and the UI
-                price.setText(property.price);
-                rooms.setText(property.rooms);
-                area.setText(property.surface);
-                description.setText(property.description);
-                spin.setSelection(viewModel.getIndexFromStatus(property.status));
-                address.setText(property.address);
-            }
+        viewModel.property.observe(this, property -> {
+            //Then we bind the User and the UI
+            price.setText(property.price);
+            rooms.setText(property.rooms);
+            area.setText(property.surface);
+            description.setText(property.description);
+            spin.setSelection(viewModel.getIndexFromStatus(property.status));
+            address.setText(property.address);
         });
     }
 
@@ -143,7 +135,7 @@ public class EditPropertyActivity extends MenuActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        status = viewModel.getStatus()[position];
+        status = viewModel.getStatus()[position];//Get status selected by user
 
     }
 

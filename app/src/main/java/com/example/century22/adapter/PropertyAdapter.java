@@ -54,7 +54,7 @@ public final class PropertyAdapter
 
         public void update(final Property property)
         {
-            //We update the UI binding the current user to the current item
+            //We update the UI binding the current property to the current item
             int imageResource = itemView.getContext().getResources()
                     .getIdentifier("@drawable/ic_"+ property.type.toLowerCase(), null, itemView.getContext().getPackageName());
             image.setImageResource(imageResource);
@@ -70,8 +70,8 @@ public final class PropertyAdapter
                 @Override
                 public void onClick(View v)
                 {
-                    //We create the intent that display the UserDetailActivity.
-                    //The current user is added as an extra
+                    //We create the intent that display the PropertyDetailActivity.
+                    //The current property is added as an extra
                     //The User class implement the "Serializable" interface so I can put the whole object as an extra
                     final Intent intent = new Intent(itemView.getContext(), PropertyDetailActivity.class);
                     intent.putExtra(PropertyDetailActivity.PROPERTY_EXTRA, property);

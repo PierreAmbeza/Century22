@@ -43,6 +43,7 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
         property.postValue(propertyExtra);
     }
 
+    /* Check if the property can be edited or not */
     public void editProperty(String price, String surface, String rooms, String type, String description, String address) {
 
         //We check if all entries are valid (not null and not empty)
@@ -57,6 +58,7 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
         }
     }
 
+    /* Update the property */
     private void updateProperty(String price, String surface, String rooms, String status, String description, String address) {
         Geocoder geocoder = new Geocoder(getApplication());
         List<Address> l;
@@ -64,7 +66,7 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
             l = geocoder.getFromLocationName(address, 1);
             double latitude = l.get(0).getLatitude();
             double longitude = l.get(0).getLongitude();
-            Date edit = Calendar.getInstance().getTime();
+            Date edit = Calendar.getInstance().getTime();//get current time as edit_date
             AppRepository.getInstance(getApplication()).updateProperty(price, rooms, address, surface, edit,
                     description, latitude, longitude, status, property.getValue().id);
         } catch (IOException e) {
@@ -84,6 +86,7 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
         return this.status;
     }
 
+    /* Get index of current status of the property in the spinner*/
     public int getIndexFromStatus(String s){
         for(int i = 0; i < status.length; i++)
         {

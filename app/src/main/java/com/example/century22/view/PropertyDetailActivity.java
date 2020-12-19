@@ -96,15 +96,17 @@ public class PropertyDetailActivity extends MenuActivity{
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Handle the click on the delete item
         if(item.getItemId() == R.id.delete)
         {
             viewModel.deleteProperty();
         }
+        //Handle the click on edit item
         else if(item.getItemId() == R.id.edit)
         {
             final Intent intent = new Intent(this, EditPropertyActivity.class);
             intent.putExtra(PropertyDetailActivity.PROPERTY_EXTRA, viewModel.property.getValue());
-            startActivity(intent);
+            startActivity(intent);//We start the edit activity with the current property as an extra
         }
         return super.onOptionsItemSelected(item);
     }
@@ -134,26 +136,22 @@ public class PropertyDetailActivity extends MenuActivity{
         notificationManagerCompat.notify(2, notificationBuilder.build());
     }
 
+    /* Method to set property's attributes in the view */
     private void observeProperty()
     {
-        viewModel.property.observe(this, new Observer<Property>()
-        {
-            @Override
-            public void onChanged(Property property)
-            {
-                //Then we bind the User and the UI
-                price.setText(property.price);
-                rooms.setText(property.rooms);
-                area.setText(property.surface);
-                description.setText(property.description);
-                type.setText(property.type);
-                status.setText(property.status);
-                agent.setText(property.agent);
-                creation.setText(property.add_date.toString());
-                update.setText(property.last_edit_date.toString());
-                address.setText(property.address);
-                _address = property.address;
-            }
+        viewModel.property.observe(this, property -> {
+            //Then we bind the User and the UI
+            price.setText(property.price);
+            rooms.setText(property.rooms);
+            area.setText(property.surface);
+            description.setText(property.description);
+            type.setText(property.type);
+            status.setText(property.status);
+            agent.setText(property.agent);
+            creation.setText(property.add_date.toString());
+            update.setText(property.last_edit_date.toString());
+            address.setText(property.address);
+            _address = property.address;
         });
     }
 
@@ -162,21 +160,19 @@ public class PropertyDetailActivity extends MenuActivity{
         Toast.makeText(this, "Only property's agent can delete it", Toast.LENGTH_SHORT).show();
     }
 
+    /* Method to decide what to display if property has been deleted or not */
     private void observeEvent()
     {
-        viewModel.event.observe(this, new Observer<Event>() {
-            @Override
-            public void onChanged(Event event) {
+        viewModel.event.observe(this, event -> {
 
-                if (event == Event.Ok)
-                {
-                    displayNotification();
-                    onBackPressed();
-                }
-                else if (event == Event.Ko)
-                {
-                    displayError();
-                }
+            if (event == Event.Ok)
+            {
+                displayNotification();
+                onBackPressed();
+            }
+            else if (event == Event.Ko)
+            {
+                displayError();
             }
         });
     }

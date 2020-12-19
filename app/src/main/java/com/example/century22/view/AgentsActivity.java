@@ -45,16 +45,6 @@ final public class AgentsActivity
     {
         super.onResume();
         initList();
-        //addProperty();
-        //We init the list into the onResume method
-        //so the list is updated each time the screen goes to foreground
-        //if(AppPreferences.getAgentLogin(this) == null)
-            //observeUsers();
-        /*else
-        {
-            final Intent intent = new Intent(this, ProfileActivity.class);
-            startActivity(intent);
-        }*/
     }
 
     @Override
@@ -69,15 +59,5 @@ final public class AgentsActivity
         recyclerView.setAdapter(agentsAdapter);
 
     }
-
-    /*
-    @Override
-    public void onClick(View v)
-    {
-        //We open the AddUserActivity screen when the user clicks on the FAB
-        final Intent intent = new Intent(this, AddUserActivity.class);
-        startActivity(intent);
-
-    }*/
 
 }

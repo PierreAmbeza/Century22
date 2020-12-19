@@ -1,5 +1,6 @@
 package com.example.century22.view;
 
+import java.io.Serializable;
 import java.util.List;
 
 import android.content.Intent;
@@ -8,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
@@ -31,6 +33,8 @@ final public class PropertiesActivity
     private RecyclerView recyclerView;
 
     private PropertiesActivityViewModel viewModel;
+
+    public static final String PROPERTIES_EXTRA = "propertiesExtra";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,11 +60,18 @@ final public class PropertiesActivity
     }
 
     @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //Handle the click on the maps icon to see all properties on google maps
         if(item.getItemId() == R.id.gmaps)
         {
             final Intent intent = new Intent(this, GoogleMapsActivity.class);
-            startActivity(intent);
+            intent.putExtra(PropertiesActivity.PROPERTIES_EXTRA, (Serializable) viewModel.properties.getValue());
+            startActivity(intent);//We start the edit activity with the current property as an extra
         }
         return super.onOptionsItemSelected(item);
     }
@@ -85,14 +96,9 @@ final public class PropertiesActivity
 
     private void observeProperties()
     {
-        viewModel.properties.observe(this, new Observer<List<Property>>()
-        {
-            @Override
-            public void onChanged(List<Property> properties)
-            {
-                final PropertyAdapter propertyAdapter = new PropertyAdapter(properties);
-                recyclerView.setAdapter(propertyAdapter);
-            }
+        viewModel.properties.observe(this, properties -> {
+            final PropertyAdapter propertyAdapter = new PropertyAdapter(properties);
+            recyclerView.setAdapter(propertyAdapter);
         });
     }
 

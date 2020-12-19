@@ -13,7 +13,7 @@ public class Agent implements Serializable
 
     @PrimaryKey
     @ColumnInfo(name = "Name")
-    public final @NonNull String name;
+    public final @NonNull String name;//Agent name, for example "Bob Dufour"
 
 
     public Agent(@NonNull String name)

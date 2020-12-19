@@ -14,7 +14,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".view.AgentsActivity"><!-- .view.PropertyActivity -->
+        <activity android:name=".view.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,12 +22,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".view.AgentsActivity" />
+            <!--android:noHistory="true"-->
+
+        <activity
             android:name=".view.GoogleMapsActivity"
             />
         <activity
-            android:name=".view.PropertiesActivity"/>
-        <!--android:parentActivityName=".view.AgentsActivity"
-        />-->
+            android:name=".view.PropertiesActivity" />
+            <!--android:noHistory="true"
+            -->
         <activity
             android:name=".view.AddPropertyActivity"
             android:parentActivityName=".view.PropertiesActivity"

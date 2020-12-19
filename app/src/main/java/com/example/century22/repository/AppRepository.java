@@ -48,7 +48,7 @@ public class AppRepository {
 
     private final AppDatabase appdatabase;
 
-    //Create database
+    //Create database with embedded values in Agent, Status and Type tables
     private AppRepository(Context context)
     {
         RoomDatabase.Callback rdc = new RoomDatabase.Callback() {

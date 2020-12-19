@@ -14,6 +14,8 @@ import com.example.century22.bo.Property;
 import com.example.century22.preferences.AppPreferences;
 import com.example.century22.repository.AppRepository;
 
+
+//Activity created to have the logout option menu on many activities
 public class MenuActivity extends AppCompatActivity {
 
     @Override
@@ -30,8 +32,9 @@ public class MenuActivity extends AppCompatActivity {
         //We handle the click on a menu item
         if (item.getItemId() == R.id.logout)
         {
-            AppPreferences.removeLogin(MenuActivity.this);
-            final Intent intent = new Intent(this, AgentsActivity.class);
+            AppPreferences.removeLogin(MenuActivity.this);//We remove login
+            finishAffinity();//Avoid the onBackPressed to resume the activity where we logged out
+            final Intent intent = new Intent(this, AgentsActivity.class);//and start agents activity
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

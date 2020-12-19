@@ -65,7 +65,7 @@ final public class AddPropertyActivity
 
         //We configure the click on the save button
         findViewById(R.id.add_property).setOnClickListener(this);
-        setSpinner();
+        setSpinner();//spinner to display type possibilities
 
         observeEvent();
     }
@@ -79,20 +79,15 @@ final public class AddPropertyActivity
 
     private void observeEvent()
     {
-        viewModel.event.observe(this, new Observer<Event>()
-        {
-            @Override
-            public void onChanged(Event event)
+        viewModel.event.observe(this, event -> {
+            if (event == Event.ResetForm)//If property has been add, then display the notification and reset the form
             {
-                if (event == Event.ResetForm)
-                {
-                    displayNotification();
-                    resetForm();
-                }
-                else if (event == Event.DisplayError)
-                {
-                    displayError();
-                }
+                displayNotification();
+                resetForm();
+            }
+            else if (event == Event.DisplayError)//Else, display an error
+            {
+                displayError();
             }
         });
     }
@@ -131,8 +126,8 @@ final public class AddPropertyActivity
 
         final NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(AddPropertyActivity.this, notificationChannelId);
         notificationBuilder.setContentTitle(getString(R.string.added_property));
-        notificationBuilder.setContentText("Price:" + price.getEditableText().toString());
-        notificationBuilder.setSmallIcon(R.drawable.ic_house);
+        notificationBuilder.setContentText("Price:" + price.getEditableText().toString());//We display the price of the added property in the notification
+        notificationBuilder.setSmallIcon(R.drawable.ic_house);//we add an icon to the notification
         notificationBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         notificationBuilder.setAutoCancel(true);
         notificationBuilder.setChannelId(notificationChannelId);
@@ -151,8 +146,7 @@ final public class AddPropertyActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        type = viewModel.getTypes()[position];
-
+        type = viewModel.getTypes()[position];//get the type selected by the user
     }
 
     @Override

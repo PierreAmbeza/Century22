@@ -34,19 +34,22 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
         property.postValue(propertyExtra);
     }
 
+    /* Method to check if we can delete property or not */
     public void deleteProperty()
     {
-        if(AppPreferences.getAgentName(getApplication()).equals(propertyExtra.agent))
-        {
+        //If agent is the agent that added the property then it can be deleted
+        if(AppPreferences.getAgentName(getApplication()).equals(propertyExtra.agent)){
             AppRepository.getInstance(getApplication()).deleteProperty(propertyExtra);
             event.postValue(Event.Ok);
         }
+        //Else we post the value to inform that we cannot delete property
         else
         {
             event.postValue(Event.Ko);
         }
     }
 
+    /* Method to refresh the attributes if property has been edited */
     public void loadProperty()
     {
         if(property.getValue() != null)

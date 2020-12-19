@@ -25,6 +25,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/type"
         android:text="Type :"
+        android:textStyle="bold"
     />
     <TextView
         android:id="@+id/type"
@@ -34,7 +35,10 @@
         app:layout_constraintStart_toEndOf="@id/type_label"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/price"
-        tools:text="@tools:sample/lorem" />
+        tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
+        />
+
 
     <!-- Price-->
     <TextView
@@ -46,6 +50,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/price"
         android:text="Price : "
+        android:textStyle="bold"
         />
     <TextView
         android:id="@+id/price"
@@ -56,6 +61,7 @@
         app:layout_constraintStart_toEndOf="@id/price_label"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
         />
 
    <!-- Area -->
@@ -68,6 +74,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/area"
         android:text="Area : "
+        android:textStyle="bold"
+
         />
     <TextView
         android:id="@+id/area"
@@ -78,6 +86,7 @@
         app:layout_constraintStart_toEndOf="@id/area_label"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
         />
 
     <!-- Rooms -->
@@ -90,40 +99,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rooms"
         android:text="Number of rooms : "
+        android:textStyle="bold"
         />
     <TextView
         android:id="@+id/rooms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/area"
-        app:layout_constraintBottom_toTopOf="@id/description_label"
+        app:layout_constraintBottom_toTopOf="@id/address"
         app:layout_constraintStart_toEndOf="@id/rooms_label"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/lorem"
-        />
-
-    <!-- Description -->
-    <TextView
-        android:id="@+id/description_label"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/rooms"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/description"
-        android:text="Description : "
-        />
-    <TextView
-        android:id="@+id/description"
-
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/description_label"
-        android:minLines="10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/address"
-        tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
         />
 
     <!-- address -->
@@ -136,6 +123,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/address"
         android:text="Adress : "
+        android:textStyle="bold"
         />
     <TextView
         android:id="@+id/address"
@@ -146,6 +134,7 @@
         app:layout_constraintStart_toEndOf="@id/address_label"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
         />
 
     <!-- creation date -->
@@ -157,7 +146,7 @@
         app:layout_constraintBottom_toBottomOf="@id/creation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/creation"
-
+        android:textStyle="bold"
         android:text="Creation date : "
         />
     <TextView
@@ -169,6 +158,7 @@
         app:layout_constraintStart_toEndOf="@id/creation_label"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
         />
 
     <!-- creation date -->
@@ -180,7 +170,7 @@
         app:layout_constraintBottom_toBottomOf="@id/update"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/creation"
-
+        android:textStyle="bold"
         android:text="Last update : "
         />
     <TextView
@@ -192,6 +182,7 @@
         app:layout_constraintStart_toEndOf="@id/update_label"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
         />
 
     <!-- status -->
@@ -204,6 +195,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/creation"
         android:text="Status : "
+        android:textStyle="bold"
         />
     <TextView
         android:id="@+id/status"
@@ -214,6 +206,7 @@
         app:layout_constraintStart_toEndOf="@id/update_label"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@tools:sample/lorem"
+        android:layout_marginBottom="20dp"
         />
 
     <!-- Agent : last textview at the end of the view-->
@@ -222,23 +215,50 @@
         android:id="@+id/agent_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/status"
+        app:layout_constraintTop_toTopOf="@id/agent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/price"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/agent"
+        app:layout_constraintBottom_toBottomOf="@id/agent"
         android:text="Agent name : "
+        android:textStyle="bold"
         />
 
-    <TextView
-        android:id="@+id/agent"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/agent_label"
-        app:layout_constraintBottom_toBottomOf="@id/agent_label"
-        app:layout_constraintStart_toEndOf="@id/agent_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="@tools:sample/lorem"
-        />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/agent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/description_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/agent_label"
+            app:layout_constraintTop_toBottomOf="@id/status"
+            android:layout_marginBottom="20dp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/description_label"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Description : "
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/agent" />
+
+        <TextView
+            android:id="@+id/description"
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/description_label"
+            android:minLines="10"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="@tools:sample/lorem/random"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

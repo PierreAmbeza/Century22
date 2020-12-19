@@ -35,10 +35,10 @@ public final class AddPropertyActivityViewModel
     }
 
     public void saveProperty(String price, String surface, String rooms, String type, String description, String address) {
-        //We display the properties into the logcat
+        //We display the property into the logcat
         displayUserEntries(price, surface, rooms, type, description, address);
 
-        //We check if all entries are valid (not null and not empty)
+        //We check if all entries are valid (not null and not empty) and not already in database
         boolean canAddProperty = checkFormEntries(price, surface, rooms, type, description, address) && checkIfExists(address);
         if (canAddProperty) {
             //We add the property to the list and we reset the form
@@ -56,10 +56,10 @@ public final class AddPropertyActivityViewModel
         String name = AppPreferences.getAgentName(getApplication());
         Log.d(AddPropertyActivityViewModel.class.getSimpleName(), name);
         try {
-            l = geocoder.getFromLocationName(address, 1);
-            double latitude = l.get(0).getLatitude();
-            double longitude = l.get(0).getLongitude();
-            Date d = Calendar.getInstance().getTime();
+            l = geocoder.getFromLocationName(address, 1);//get address from string address
+            double latitude = l.get(0).getLatitude();//get latitute from address
+            double longitude = l.get(0).getLongitude();//get longitude from address
+            Date d = Calendar.getInstance().getTime();//get current date, stored as add_date and edit_date on creation
             AppRepository.getInstance(getApplication()).addProperty(new Property(price, surface,
                     rooms, type, description, address, latitude, longitude, "Not sold", name, d, d));
         } catch (IOException e) {
@@ -84,6 +84,7 @@ public final class AddPropertyActivityViewModel
 
     }
 
+    /* Check if property is already in database or not */
     private boolean checkIfExists(String address) {
         List<Property> properties = AppRepository.getInstance(getApplication()).getProperties();
         for (int i = 0; i < properties.size(); i++) {

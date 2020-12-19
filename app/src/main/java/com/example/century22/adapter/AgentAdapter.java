@@ -41,7 +41,7 @@ public final class AgentAdapter
 
         public void update(final Agent agent)
         {
-            //We update the UI binding the current user to the current item
+            //We update the UI binding the current agent to the current item
             name.setText(agent.name);
 
             //We handle the click on the current item in order to display a new activity
@@ -51,9 +51,7 @@ public final class AgentAdapter
                 @Override
                 public void onClick(View v)
                 {
-                    //We create the intent that display the UserDetailActivity.
-                    //The current user is added as an extra
-                    //The User class implement the "Serializable" interface so I can put the whole object as an extra
+                    //We create the intent that display the PropertiesActivity.
                     AppPreferences.saveAgentLogin(itemView.getContext(), agent.name);
                     final Intent intent = new Intent(itemView.getContext(), PropertiesActivity.class);
                     itemView.getContext().startActivity(intent);
