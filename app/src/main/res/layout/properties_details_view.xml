@@ -260,5 +260,17 @@
             tools:text="@tools:sample/lorem/random"
             />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/currency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/area"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/type"
+            android:src="@drawable/ic_currency"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="mini"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

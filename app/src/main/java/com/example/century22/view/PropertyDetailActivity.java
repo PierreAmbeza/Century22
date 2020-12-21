@@ -7,13 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import android.view.View.OnClickListener;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.lifecycle.AbstractSavedStateViewModelFactory;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
@@ -25,7 +26,7 @@ import com.example.century22.viewmodel.AddPropertyActivityViewModel;
 import com.example.century22.viewmodel.PropertyDetailActivityViewModel;
 import com.example.century22.viewmodel.PropertyDetailActivityViewModel.Event;
 
-public class PropertyDetailActivity extends MenuActivity{
+public class PropertyDetailActivity extends MenuActivity implements OnClickListener {
 
     public static final String PROPERTY_EXTRA = "propertyExtra";
 
@@ -53,7 +54,7 @@ public class PropertyDetailActivity extends MenuActivity{
 
     private PropertyDetailActivityViewModel viewModel;
 
-    private String _address;
+    private String _currency = "€";
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -62,6 +63,7 @@ public class PropertyDetailActivity extends MenuActivity{
 
         //We first set up the layout linked to the activity
         setContentView(R.layout.properties_details_view);
+        findViewById(R.id.currency).setOnClickListener(this);
 
         //Then we retrieved the widget we will need to manipulate into the
         price = findViewById(R.id.price);
@@ -83,7 +85,6 @@ public class PropertyDetailActivity extends MenuActivity{
         super.onResume();
         viewModel.loadProperty();
         observeProperty();
-
     }
 
     @Override
@@ -111,6 +112,22 @@ public class PropertyDetailActivity extends MenuActivity{
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onClick(View v) {
+        viewModel.convert(_currency);
+        observeCurrency();
+    }
+
+    /* Method to set property's attributes in the view */
+    private void observeCurrency()
+    {
+        viewModel.currency.observe(this, currency -> {
+            //Then we bind the User and the UI
+            price.setText(currency.getConverted_price() + currency.getCurrency());
+            _currency = currency.getCurrency();
+        });
+    }
+
     private void displayNotification()
     {
         final NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
@@ -127,7 +144,7 @@ public class PropertyDetailActivity extends MenuActivity{
 
         final NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(PropertyDetailActivity.this, notificationChannelId);
         notificationBuilder.setContentTitle("Deleted property:");
-        notificationBuilder.setContentText("Location:" +_address);
+        notificationBuilder.setContentText("Location:" + address.getText().toString());
         notificationBuilder.setSmallIcon(R.drawable.ic_house);
         notificationBuilder.setPriority(NotificationCompat.PRIORITY_MAX);
         notificationBuilder.setAutoCancel(true);
@@ -141,7 +158,7 @@ public class PropertyDetailActivity extends MenuActivity{
     {
         viewModel.property.observe(this, property -> {
             //Then we bind the User and the UI
-            price.setText(property.price);
+            price.setText(property.price + _currency);
             rooms.setText(property.rooms);
             area.setText(property.surface);
             description.setText(property.description);
@@ -151,7 +168,6 @@ public class PropertyDetailActivity extends MenuActivity{
             creation.setText(property.add_date.toString());
             update.setText(property.last_edit_date.toString());
             address.setText(property.address);
-            _address = property.address;
         });
     }
 
