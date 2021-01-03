@@ -17,12 +17,12 @@ import com.example.century22.view.AddPropertyActivity;
 import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public final class AddPropertyActivityViewModel
         extends AndroidViewModel {
+
 
     public enum Event {
         ResetForm, DisplayError, AddressNotFound
@@ -49,6 +49,7 @@ public final class AddPropertyActivityViewModel
         }
     }
 
+    //Save property in database
     private void persistProperty(String price, String surface, String rooms, String type, String description, String address) {
         Geocoder geocoder = new Geocoder(getApplication());
         List<Address> l;
@@ -59,14 +60,14 @@ public final class AddPropertyActivityViewModel
             if(l.size() != 0) {
                 double latitude = l.get(0).getLatitude();//get latitute from address
                 double longitude = l.get(0).getLongitude();//get longitude from address
-                Format f = new SimpleDateFormat("yyyy-MM-dd");
+                Format f = new SimpleDateFormat("yyyy-MM-dd");//format date
                 String strDate = f.format(new Date());
                 AppRepository.getInstance(getApplication()).addProperty(new Property(price, surface,
                         rooms, type, description, address, latitude, longitude, "Not sold", name, strDate, strDate));
-                event.postValue(Event.ResetForm);
+                event.postValue(Event.ResetForm);//property has been added into db
             }
             else{
-                event.postValue(Event.AddressNotFound);
+                event.postValue(Event.AddressNotFound);//cannot add property due to address error
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -99,6 +100,7 @@ public final class AddPropertyActivityViewModel
         return true;
     }
 
+    //Get types for spinner
     public String[] getTypes() {
         return AppRepository.getInstance(getApplication()).getTypes();
     }

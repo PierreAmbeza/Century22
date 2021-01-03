@@ -4,15 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.DividerItemDecoration;
-
 import com.example.century22.R;
-import com.example.century22.adapter.PropertyAdapter;
-import com.example.century22.bo.Property;
-import com.example.century22.viewmodel.AddPropertyActivityViewModel;
-import com.example.century22.viewmodel.AgentsActivityViewModel;
 import com.example.century22.viewmodel.LaunchActivityViewModel;
 
 import java.util.List;

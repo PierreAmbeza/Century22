@@ -4,24 +4,19 @@ import android.app.Application;
 import android.location.Address;
 import android.location.Geocoder;
 import android.text.TextUtils;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.SavedStateHandle;
 
 import com.example.century22.bo.Property;
-import com.example.century22.preferences.AppPreferences;
 import com.example.century22.repository.AppRepository;
 import com.example.century22.view.EditPropertyActivity;
-import com.example.century22.view.PropertyDetailActivity;
 
 import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

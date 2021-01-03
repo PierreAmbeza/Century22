@@ -1,32 +1,24 @@
 package com.example.century22.view;
 
 import java.io.Serializable;
-import java.util.List;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.century22.R;
 import com.example.century22.adapter.PropertyAdapter;
-import com.example.century22.bo.Property;
 import com.example.century22.viewmodel.PropertiesActivityViewModel;
 
 final public class PropertiesActivity
@@ -41,6 +33,8 @@ final public class PropertiesActivity
     private PropertiesActivityViewModel viewModel;
 
     public static final String PROPERTIES_EXTRA = "propertiesExtra";
+
+    //From here, all variables used for the search form
 
     private View search_view;
 
@@ -96,12 +90,12 @@ final public class PropertiesActivity
         max_edit_date = findViewById(R.id.MaxEditDate);
         min_edit_date = findViewById(R.id.MinEditDate);
 
-        min_rooms.setText("1");
-        max_rooms.setText("20");
-        min_price.setText("0");
-        max_price.setText("10000000");
-        min_area.setText("0");
-        max_area.setText("20000");
+        min_rooms.setText("1");//minimum number of rooms
+        max_rooms.setText("20");//maximum number of rooms
+        min_price.setText("0");//minimum price
+        max_price.setText("10000000");//maximum price
+        min_area.setText("0");//minimum area
+        max_area.setText("20000");//maximum area
 
 
         house = findViewById(R.id.houseBox);
@@ -110,7 +104,7 @@ final public class PropertiesActivity
         sold = findViewById(R.id.soldBox);
         not_sold = findViewById(R.id.notSoldBox);
 
-
+        //Checkboxes definition
         house.setOnCheckedChangeListener(this);
         office.setOnCheckedChangeListener(this);
         flat.setOnCheckedChangeListener(this);
@@ -126,6 +120,7 @@ final public class PropertiesActivity
         observeProperties();
     }
 
+    //Add gmaps and search options into the menu for this view
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -148,7 +143,7 @@ final public class PropertiesActivity
             intent.putExtra(PropertiesActivity.PROPERTIES_EXTRA, (Serializable) viewModel.properties.getValue());
             startActivity(intent);//We start the edit activity with the current property as an extra
         }
-        else if(item.getItemId() == R.id.search)
+        else if(item.getItemId() == R.id.search)//Make the search layout visible and hide property recycler when click on search item
         {
                 recyclerView.setVisibility(View.INVISIBLE);
                 search_view.setVisibility(View.VISIBLE);
@@ -167,20 +162,22 @@ final public class PropertiesActivity
         viewModel.loadProperties();
     }
 
+    //Handle click depending on the button
+
     @Override
     public void onClick(View v)
     {
         switch(v.getId()){
-            case R.id.view_all:
+            case R.id.view_all://View all properties
                 viewModel.loadProperties();
-                observeProperties();
+                //observeProperties();
                 break;
             case R.id.property_add_button:
-                //We open the AddUserActivity screen when the user clicks on the FAB
+                //We open the AddPropertyActivity screen when the user clicks on the FAB
                 final Intent intent = new Intent(this, AddPropertyActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.search_button:
+            case R.id.search_button://search properties with user entries
                 final String _min_rooms = min_rooms.getText().toString();
                 final String _max_rooms = max_rooms.getText().toString();
 
@@ -201,6 +198,7 @@ final public class PropertiesActivity
         }
     }
 
+    //Make recycler visible and hide search form when search has been done or display message on search layout if error
     private void observeEvent(){
         viewModel.event.observe(this, event -> {
             if(event == PropertiesActivityViewModel.Event.CannotSearch)
@@ -217,6 +215,7 @@ final public class PropertiesActivity
         });
     }
 
+    //Reset search form
     private void resetSearch()
     {
         min_add_date.setText(null);
@@ -225,6 +224,7 @@ final public class PropertiesActivity
         max_edit_date.setText(null);
     }
 
+    //Set recycler view adapter when properties have been loaded
     private void observeProperties() {
         viewModel.properties.observe(this, properties -> {
             final PropertyAdapter propertyAdapter = new PropertyAdapter(properties);
@@ -232,6 +232,7 @@ final public class PropertiesActivity
         });
     }
 
+    //Checkboxes state handler
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         viewModel.checkBoxManager(buttonView.getId(), isChecked, buttonView.getText().toString());

@@ -8,13 +8,10 @@ import android.os.Bundle;
 
 import com.example.century22.R;
 import com.example.century22.adapter.AgentAdapter;
-import com.example.century22.bo.Agent;
 
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.century22.viewmodel.AgentsActivityViewModel;
-
-import java.util.List;
 
 final public class AgentsActivity
         extends AppCompatActivity
@@ -41,17 +38,7 @@ final public class AgentsActivity
         observeAgents();
     }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
+    //Observe method to load agents into the recycler view
     private void observeAgents()
     {
         viewModel.agents.observe(this, agents -> {

@@ -5,12 +5,9 @@ import androidx.annotation.RequiresPermission;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
 import android.Manifest.permission;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -53,6 +50,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     private FusedLocationProviderClient client;
 
+    //Add user's location on map
     private LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -72,6 +70,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         }
     };
 
+    //Ask for location permission
     @SuppressLint("MissingPermission")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
@@ -117,7 +116,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     protected void onResume()
     {
         super.onResume();
-        trackPermissionCheck();
+        trackPermissionCheck();//track permission and location each time the view goes to foreground
     }
 
     /**
@@ -135,6 +134,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
         observeProperties();
     }
 
+    //Add a property on the map with appropriate marker color
     private void addProperty(double latitude, double longitude, String status)
     {
         LatLng place = new LatLng(latitude, longitude);
@@ -193,6 +193,7 @@ public class GoogleMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
 
+    //Start detail activity with corresponding property when click on a marker
     @Override
     public boolean onMarkerClick(Marker marker) {
         if(markers.indexOf(marker) != -1) {

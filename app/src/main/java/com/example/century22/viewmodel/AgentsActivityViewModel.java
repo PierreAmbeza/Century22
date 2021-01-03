@@ -20,6 +20,7 @@ public class AgentsActivityViewModel extends AndroidViewModel {
         super(application);
     }
 
+    //Load agents from db
     public void loadAgents()
     {
         agents.postValue(AppRepository.getInstance(getApplication()).getAgents());

@@ -42,15 +42,9 @@ public final class PropertiesActivityViewModel
     String queryString ;
 
 
-    public int[] rooms = new int[50];
-
     public PropertiesActivityViewModel(@NonNull Application application)
     {
         super(application);
-        for(int i = 0; i < 50; i++)
-        {
-            rooms[i] = i+1;
-        }
     }
 
     public void loadProperties()
@@ -59,6 +53,7 @@ public final class PropertiesActivityViewModel
         event.postValue(Event.Search);
     }
 
+    //Adding type or status to corresponding array when checkbox is checked or remove when unchecked
     public void checkBoxManager(int id, boolean isChecked, String value)
     {
         if (isChecked && (id == R.id.houseBox || id == R.id.officeBox || id == R.id.flatBox)) {
@@ -81,12 +76,10 @@ public final class PropertiesActivityViewModel
     {
         queryString = "SELECT * FROM Property ";
         if(max_add_date.isEmpty())
-            max_add_date = "1970-01-01";
+            max_add_date = "1970-01-01";//default date for searching into db
         if(max_edit_date.isEmpty())
-            max_edit_date = max_add_date;
-        boolean canSearch = checkSearchEntriesNumbers(min_price, max_price, min_area, max_area, min_rooms, max_rooms) ;//&& checkDateEntries(min_add_date, max_add_date, min_edit_date, max_edit_date);
-        //boolean rand = checkDateEntries(min_add_date, max_add_date, min_edit_date, max_edit_date);
-        //Log.d(PropertiesActivity.TAG, String.valueOf(rand));
+            max_edit_date = max_add_date;//default date for searching into db
+        boolean canSearch = checkSearchEntriesNumbers(min_price, max_price, min_area, max_area, min_rooms, max_rooms);
         if(canSearch)
         {
             minMaxPriceCheck(min_price, max_price);
@@ -112,6 +105,8 @@ public final class PropertiesActivityViewModel
             event.postValue(Event.CannotSearch);
         }
     }
+
+    /* Adding string to the querystring for filter search */
 
     private void minMaxPriceCheck(String min_price, String max_price)
     {
@@ -142,7 +137,7 @@ public final class PropertiesActivityViewModel
 
     private void addDateFilter(String min_add_date, String max_add_date)
     {
-        Pattern date_pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+        Pattern date_pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");//check input format from user
         if(date_pattern.matcher(min_add_date).matches())
         {
             queryString += " AND add_date BETWEEN " + "'"+ max_add_date + "'" + " AND " + "'" + min_add_date + "'";
@@ -155,7 +150,7 @@ public final class PropertiesActivityViewModel
 
     private void editDateFilter(String min_edit_date, String max_edit_date)
     {
-        Pattern date_pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
+        Pattern date_pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");//check input format from user
         if(date_pattern.matcher(min_edit_date).matches())
         {
             queryString += " AND last_edit_date BETWEEN " + "'"+ max_edit_date + "'" + " AND " + "'" + min_edit_date + "'";
@@ -184,15 +179,5 @@ public final class PropertiesActivityViewModel
                 && TextUtils.isEmpty(max_area) == false && TextUtils.isEmpty(min_rooms) == false
                 && TextUtils.isEmpty(max_rooms) == false && Integer.parseInt(min_price) < Integer.parseInt(max_price) && Integer.parseInt(min_area) < Integer.parseInt(max_area) && Integer.parseInt(min_rooms) < Integer.parseInt(max_rooms);
     }
-
-    /*private boolean checkDateEntries(String min_add_date, String max_add_date, String min_edit_date, String max_edit_date)
-    {
-
-        Pattern date_pattern = Pattern.compile("\\d{4}-\\d{2}-\\d{2}");
-        if(date_pattern.matcher(min_add_date).matches() && date_pattern.matcher(min_edit_date).matches()){
-            return true;
-        }
-        return false;
-    }*/
 
 }

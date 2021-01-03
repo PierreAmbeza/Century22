@@ -23,7 +23,9 @@ public class AppRepository {
 
     private static volatile AppRepository instance;
 
-    private final String[] agentsNames = {"Bob Dufour", "Denis McQuaid"};
+    /* Definition of embedded values for tables */
+
+    private final String[] agentsNames = {"Bob Dufour", "Denis McQuaid", "Steven Plazo", "Mini Madhy", "Jean Cornflex"};
 
     private final String[] status = { "Not sold", "Sold"};
 
@@ -54,7 +56,7 @@ public class AppRepository {
     {
         RoomDatabase.Callback rdc = new RoomDatabase.Callback() {
             public void onCreate (SupportSQLiteDatabase db) {
-
+                /* Creating table and insert above arrays in tables */
                 ContentValues contentValues = new ContentValues();
                 for(int i = 0; i < agentsNames.length; i++) {
                     contentValues.put("Name", agentsNames[i]);
@@ -73,10 +75,10 @@ public class AppRepository {
             }
         };
         appdatabase = Room.databaseBuilder(context, AppDatabase.class, "app-database").addCallback(rdc).allowMainThreadQueries().build();
-        //context.deleteDatabase("app-database");
+        //context.deleteDatabase("app-database");//needed to delete the db
     }
 
-
+    /* Methods to get data from Database */
 
     public List<Agent> getAgents() { return appdatabase.agentDao().getAllAgents(); }
 

@@ -30,6 +30,7 @@ public class SimulatorActivityViewModel extends AndroidViewModel {
         Random r = new Random();
         propertyExtra = savedStateHandle.get(PropertyDetailActivity.PROPERTY_EXTRA);
         property.postValue(propertyExtra);
+        //Computing loan rate and contribution
         loan_rate = r.nextInt(40) / 100.0 + 0.1;
         loan_rate = Math.floor(loan_rate * 100) / 100;
         contribution = (int) (loan_rate / 100.0 * Double.parseDouble(propertyExtra.price));
@@ -38,6 +39,6 @@ public class SimulatorActivityViewModel extends AndroidViewModel {
     public void computeTotalPrice(String duration)
     {
         if(!duration.isEmpty())
-            total_price = Integer.parseInt(duration)*contribution;
+            total_price = Integer.parseInt(duration)*contribution;//computing total contribution with duration
     }
 }

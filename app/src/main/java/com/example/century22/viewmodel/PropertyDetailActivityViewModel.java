@@ -36,6 +36,7 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
         Ok, Ko
     }
 
+    //Class to manage exchange rate for currency
     public class Exchange{
         String currency;
 
@@ -111,11 +112,10 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
         {
             @Override
             public void onResponse(Call<CResponse> call, Response<CResponse> response) {
-                //if(!(response.isSuccessful()))
                 Log.d(PropertyDetailActivityViewModel.class.getSimpleName(), String.valueOf(response.code()));
                 CResponse data = response.body();//We get the data from the api
                 rate = data.getRates();
-                setExchange(current_currency);
+                setExchange();
             }
             @Override
             public void onFailure(Call<CResponse> call, Throwable t) {
@@ -124,7 +124,8 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
             } });
     }
 
-    private void setExchange(String current_currency){
+    //Set price and currency symbol after api has been called
+    private void setExchange(){
         int new_price;
         new_price = (int) (Integer.parseInt(property.getValue().price)*rate.getUSD());
         Exchange ex = new Exchange("$", Integer.toString(new_price));
@@ -132,11 +133,12 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
     }
 
 
+    //Convert currency
     public void convert(String current_currency)
     {
-        if(current_currency.equals("€"))
+        if(current_currency.equals("€"))//if current currency is € then call APi to convert
             currencyFromAPI(current_currency);
-        else{
+        else{//else use original property's price
             Exchange ex = new Exchange("€", property.getValue().price);
             currency.postValue(ex);
         }

@@ -1,6 +1,8 @@
 package com.example.century22.bo;
 import com.squareup.moshi.Json;
 
+/* Class from the JSON response from API call */
+
 public class Rates {
 
     @Json(name = "USD")
@@ -8,10 +10,6 @@ public class Rates {
 
     public Double getUSD() {
         return uSD;
-    }
-
-    public void setUSD(Double uSD) {
-        this.uSD = uSD;
     }
 
 }

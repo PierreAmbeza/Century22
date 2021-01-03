@@ -10,7 +10,6 @@ import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.example.century22.bo.Property;
 
-import java.util.Date;
 import java.util.List;
 
 @Dao

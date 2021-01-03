@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,16 +16,10 @@ import android.view.View.OnClickListener;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.century22.R;
-import com.example.century22.bo.Agent;
-import com.example.century22.bo.Property;
-import com.example.century22.preferences.AppPreferences;
-import com.example.century22.viewmodel.AddPropertyActivityViewModel;
-import com.example.century22.viewmodel.LaunchActivityViewModel;
 import com.example.century22.viewmodel.PropertyDetailActivityViewModel;
 import com.example.century22.viewmodel.PropertyDetailActivityViewModel.Event;
 
@@ -58,6 +51,7 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
 
     private PropertyDetailActivityViewModel viewModel;
 
+    //Default currency
     private String _currency = "€";
 
     @Override
@@ -83,10 +77,12 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
 
         findViewById(R.id.simulation).setOnClickListener(this);
 
+        //create vm with property extra
         viewModel = new ViewModelProvider(this, new SavedStateViewModelFactory(getApplication(), this, getIntent().getExtras())).get(PropertyDetailActivityViewModel.class);
         observeEvent();
     }
 
+    //load property to refresh each time the activity comes to foreground
     @Override
     protected void onResume() {
         super.onResume();
@@ -99,6 +95,7 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
         super.onBackPressed();
     }
 
+    //Add edit and delete options
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -107,6 +104,7 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
         return true;
     }
 
+    //What do to when user click on an item
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //Handle the click on the delete item
@@ -124,6 +122,7 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+    //Click on currency button calls the API to convert price or click on simulation opens simulation activity
     @Override
     public void onClick(View v) {
         Log.d(TAG, String.valueOf(v.getId()));
@@ -139,16 +138,16 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
         }
     }
 
-    /* Method to set property's attributes in the view */
+    /* Method to set property's price with new currency in the view */
     private void observeCurrency()
     {
         viewModel.currency.observe(this, currency -> {
-            //Then we bind the User and the UI
             price.setText(currency.getConverted_price() + " " + currency.getCurrency());
             _currency = currency.getCurrency();
         });
     }
 
+    //Send notification when property is deleted
     private void displayNotification()
     {
         final NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);

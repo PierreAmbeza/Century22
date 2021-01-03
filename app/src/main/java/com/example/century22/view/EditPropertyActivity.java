@@ -14,15 +14,12 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.century22.R;
-import com.example.century22.bo.Property;
 import com.example.century22.viewmodel.EditPropertyActivityViewModel;
 import com.example.century22.viewmodel.EditPropertyActivityViewModel.Event;
-import com.example.century22.viewmodel.PropertyDetailActivityViewModel;
 
 public class EditPropertyActivity extends MenuActivity
         implements View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -52,7 +49,7 @@ public class EditPropertyActivity extends MenuActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
+        //view model created with an extra from property detail activity
         viewModel = new ViewModelProvider(this, new SavedStateViewModelFactory(getApplication(), this, getIntent().getExtras())).get(EditPropertyActivityViewModel.class);
         //We first set up the layout linked to the activity
         setContentView(R.layout.activity_edit_property);
@@ -73,6 +70,7 @@ public class EditPropertyActivity extends MenuActivity
         observeEvent();
     }
 
+    //Spinner to choose between Sold and not Sold status
     private void setSpinner(){
         ArrayAdapter<String> aa = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,viewModel.getStatus());
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -129,6 +127,7 @@ public class EditPropertyActivity extends MenuActivity
         });
     }
 
+    //Edit property in database or not when user click on edit button
     @Override
     public void onClick(View v)
     {
@@ -142,12 +141,15 @@ public class EditPropertyActivity extends MenuActivity
         viewModel.editProperty(_price, _area, _rooms, status, _description, _address);
     }
 
+    //Get selected status from spinner
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         status = viewModel.getStatus()[position];//Get status selected by user
 
     }
 
+    //Display notification when property has been edited
     private void displayNotification()
     {
         final NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);

@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.century22.R;
@@ -77,10 +76,11 @@ final public class AddPropertyActivity
         spin.setAdapter(aa);
     }
 
+    //Observe if a new property has been added or not */
     private void observeEvent()
     {
         viewModel.event.observe(this, event -> {
-            if (event == Event.ResetForm)//If property has been add, then display the notification and reset the form
+            if (event == Event.ResetForm)//If property has been added, then display the notification and reset the form
             {
                 displayNotification();
                 resetForm();
@@ -96,16 +96,19 @@ final public class AddPropertyActivity
         });
     }
 
+    //Display error when entered address hasn't been found
     private void displayAddressError()
     {
         Toast.makeText(this, R.string.address_error, Toast.LENGTH_SHORT).show();
     }
 
+    //Display error when property has not been added
     private void displayError()
     {
         Toast.makeText(this, R.string.cannot_add_property, Toast.LENGTH_SHORT).show();
     }
 
+    //Click and call to VM to check if we can save the property
     @Override
     public void onClick(View v)
     {
@@ -118,6 +121,8 @@ final public class AddPropertyActivity
 
         viewModel.saveProperty(_price, _area, _rooms, type, _description, _address);
     }
+
+    //Send notification if property has been added
 
     private void displayNotification()
     {
@@ -144,6 +149,7 @@ final public class AddPropertyActivity
         notificationManagerCompat.notify(1, notificationBuilder.build());
     }
 
+    //Reset form once a property has been added
     private void resetForm()
     {
         price.setText(null);
@@ -153,6 +159,8 @@ final public class AddPropertyActivity
         description.setText(null);
     }
 
+
+    //Get selected item from spinner
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         type = viewModel.getTypes()[position];//get the type selected by the user

@@ -1,6 +1,5 @@
 package com.example.century22.view;
 
-import android.graphics.RenderNode;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -11,11 +10,7 @@ import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.century22.R;
-import com.example.century22.viewmodel.AddPropertyActivityViewModel;
-import com.example.century22.viewmodel.PropertyDetailActivityViewModel;
 import com.example.century22.viewmodel.SimulatorActivityViewModel;
-
-import java.util.Random;
 
 public class SimulatorActivity extends MenuActivity implements View.OnClickListener {
 
@@ -51,6 +46,7 @@ public class SimulatorActivity extends MenuActivity implements View.OnClickListe
         observeProperty();
     }
 
+    //Set layout views with property's info
     private void observeProperty()
     {
         viewModel.property.observe(this, property -> {
@@ -64,6 +60,7 @@ public class SimulatorActivity extends MenuActivity implements View.OnClickListe
         });
     }
 
+    //Handle click to simulate loan and display toast with result
     @Override
     public void onClick(View v) {
         final String _duration = durationInput.getText().toString();

@@ -4,16 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView.Adapter;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-
 import java.util.List;
-
 import android.content.Intent;
 import android.view.View.OnClickListener;
-
 import com.example.century22.R;
 import com.example.century22.bo.Agent;
 import com.example.century22.preferences.AppPreferences;
