@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:text="@string/search_rooms"
         app:layout_constraintTop_toBottomOf="@id/area_min"
-        app:layout_constraintBottom_toTopOf="@id/search_editDate"
+        app:layout_constraintBottom_toTopOf="@id/rooms_min"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
      />
@@ -94,7 +94,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rooms_max"
         app:layout_constraintTop_toBottomOf="@id/search_rooms"
-        app:layout_constraintBottom_toTopOf="@id/search_addDate"
+        app:layout_constraintBottom_toTopOf="@id/MaxAddDate_label"
         android:hint="Minimum rooms"
         android:inputType="number"
         />
@@ -105,65 +105,113 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/rooms_min"
-        app:layout_constraintTop_toBottomOf="@id/search_rooms"
-        app:layout_constraintBottom_toTopOf="@id/search_addDate"
+        app:layout_constraintTop_toTopOf="@id/rooms_min"
+        app:layout_constraintBottom_toBottomOf="@id/rooms_min"
         android:hint="Maximum rooms"
         android:inputType="number"
         />
 
+    <!-- Add Dates-->
 
     <TextView
-        android:id="@+id/search_addDate"
+        android:id="@+id/MaxAddDate_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/search_add"
-        app:layout_constraintTop_toBottomOf="@id/rooms_min"
-        app:layout_constraintBottom_toTopOf="@id/lastAddDate"
+        android:text="Maximum add date :"
+        app:layout_constraintBottom_toTopOf="@id/MaxAddDate"
+        app:layout_constraintEnd_toStartOf="@id/MinAddDate_label"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/search_editDate"
-        />
+        app:layout_constraintTop_toBottomOf="@id/rooms_min" />
 
     <TextView
-        android:id="@+id/search_editDate"
+        android:id="@+id/MinAddDate_label"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/search_edit"
-        app:layout_constraintTop_toBottomOf="@id/rooms_max"
-        app:layout_constraintBottom_toTopOf="@id/lastEditDate"
-        app:layout_constraintStart_toEndOf="@id/search_addDate"
+        android:text="Minimum add date :"
+        app:layout_constraintTop_toTopOf="@id/MaxAddDate_label"
+        app:layout_constraintBottom_toBottomOf="@id/MaxAddDate_label"
+        app:layout_constraintStart_toEndOf="@id/MaxAddDate_label"
         app:layout_constraintEnd_toEndOf="parent"
         />
 
     <EditText
-        android:id="@+id/lastAddDate"
+        android:id="@+id/MinAddDate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="yyyy-mm-dd"
         android:inputType="date"
-        app:layout_constraintTop_toBottomOf="@id/search_addDate"
+        app:layout_constraintTop_toBottomOf="@id/MinAddDate_label"
+        app:layout_constraintBottom_toTopOf="@id/MinEditDate_label"
+        app:layout_constraintStart_toEndOf="@id/MaxAddDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/MaxAddDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="yyyy-mm-dd"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@id/MaxAddDate_label"
+        app:layout_constraintBottom_toTopOf="@id/MaxEditDate_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/MinAddDate"
+        />
+
+    <!-- Edit date-->
+
+    <TextView
+        android:id="@+id/MaxEditDate_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Maximum edit date :"
+        app:layout_constraintTop_toBottomOf="@id/MaxAddDate"
+        app:layout_constraintBottom_toTopOf="@id/MaxEditDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/MinEditDate_label"
+        />
+
+    <TextView
+        android:id="@+id/MinEditDate_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Minimum edit date :"
+        app:layout_constraintTop_toTopOf="@id/MaxEditDate_label"
+        app:layout_constraintBottom_toBottomOf="@id/MaxEditDate_label"
+        app:layout_constraintStart_toEndOf="@id/MaxEditDate_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/MinEditDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="yyyy-mm-dd"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@id/MinEditDate_label"
+        app:layout_constraintBottom_toTopOf="@id/houseBox"
+        app:layout_constraintStart_toEndOf="@id/MaxAddDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/MaxEditDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="yyyy-mm-dd"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@id/MaxEditDate_label"
         app:layout_constraintBottom_toTopOf="@id/houseBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/search_editDate"
+        app:layout_constraintEnd_toStartOf="@id/MinAddDate"
         />
 
-    <EditText
-        android:id="@+id/lastEditDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="yyyy-mm-dd"
-        android:inputType="date"
-        app:layout_constraintTop_toBottomOf="@id/search_editDate"
-        app:layout_constraintBottom_toTopOf="@id/officeBox"
-        app:layout_constraintStart_toEndOf="@id/search_addDate"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-
+    <!-- CheckBox, very usefull for the research mode -->
     <CheckBox
         android:id="@+id/houseBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/lastAddDate"
+        app:layout_constraintTop_toBottomOf="@id/MaxEditDate"
         app:layout_constraintBottom_toTopOf="@id/soldBox"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/flatBox"
@@ -176,8 +224,8 @@
         android:id="@+id/flatBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/lastAddDate"
-        app:layout_constraintBottom_toTopOf="@id/soldBox"
+        app:layout_constraintTop_toTopOf="@id/houseBox"
+        app:layout_constraintBottom_toBottomOf="@id/houseBox"
         app:layout_constraintStart_toEndOf="@id/houseBox"
         app:layout_constraintEnd_toStartOf="@id/officeBox"
         android:checked="false"
@@ -189,8 +237,8 @@
         android:id="@+id/officeBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/lastEditDate"
-        app:layout_constraintBottom_toTopOf="@id/notSoldBox"
+        app:layout_constraintTop_toTopOf="@id/houseBox"
+        app:layout_constraintBottom_toBottomOf="@id/houseBox"
         app:layout_constraintStart_toEndOf="@id/flatBox"
         app:layout_constraintEnd_toEndOf="parent"
         android:buttonTint="@color/colorPrimary"
@@ -205,7 +253,7 @@
         app:layout_constraintTop_toBottomOf="@id/houseBox"
         app:layout_constraintBottom_toTopOf="@id/search_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/notSoldBox"
+        app:layout_constraintEnd_toStartOf="@id/flatBox"
         android:buttonTint="@color/colorPrimary"
         android:checked="false"
         android:text="Sold"
@@ -215,8 +263,8 @@
         android:id="@+id/notSoldBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/officeBox"
-        app:layout_constraintBottom_toTopOf="@id/search_button"
+        app:layout_constraintTop_toTopOf="@id/soldBox"
+        app:layout_constraintBottom_toBottomOf="@id/soldBox"
         app:layout_constraintStart_toEndOf="@id/soldBox"
         app:layout_constraintEnd_toEndOf="parent"
         android:buttonTint="@color/colorPrimary"
@@ -230,11 +278,26 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/soldBox"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/view_all"
         app:layout_constraintBottom_toBottomOf="parent"
         android:buttonTint="@color/colorPrimary"
         android:text="Search"
         android:textColor="@color/black"
         />
+
+    <Button
+        android:id="@+id/view_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/soldBox"
+        app:layout_constraintStart_toEndOf="@id/search_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:buttonTint="@color/colorPrimary"
+        android:text="View all"
+        android:textColor="@color/black"
+        />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

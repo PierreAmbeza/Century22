@@ -8,6 +8,7 @@
     android:background="?attr/selectableItemBackground"
     android:padding="12dp">
 
+    <!-- File used to display the logo of our company when the app is launch -->
 
     <ImageView
         android:id="@+id/century22"

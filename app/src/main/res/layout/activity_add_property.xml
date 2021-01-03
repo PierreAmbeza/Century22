@@ -13,15 +13,11 @@
     >
 
     <!--
-    * We use the hint attribute to display the "type" string
-    * The type string has been extracted into a dedicated file
-    * The width is "0dp" because the "match_parent" value cannot be
-    used with the constraintLayout
-    * We use the inputType attribute to display the best keyboard
-    to the user
-    *
+        This XML file is used to add a new property in the database
     -->
 
+
+    <!-- Type -->
     <TextView
         android:id="@+id/type_label"
         android:layout_width="wrap_content"
@@ -34,6 +30,7 @@
         android:textSize="18sp"
         />
 
+    <!-- Spinner to select the type -->
     <Spinner
         android:id="@+id/type"
         android:layout_width="0dp"
@@ -42,15 +39,8 @@
         app:layout_constraintTop_toTopOf="@id/type_label"
         />
 
-    <!--
-    * We use the hint attribute to display the "Phone Number" string
-    * The type string has been extracted into a dedicated file
-    * The width is "0dp" because the "match_parent" value cannot be
-    used with the constraintLayout
-    * We use the inputType attribute to display the best keyboard
-    to the user
-    *
-    -->
+
+    <!-- Price -->
     <EditText
         android:id="@+id/price"
         android:layout_width="0dp"
@@ -62,15 +52,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         />
-    <!--
-    * We use the hint attribute to display the "Address" string
-    * The type string has been extracted into a dedicated file
-    * The width is "0dp" because the "match_parent" value cannot be
-    used with the constraintLayout
-    * We use the inputType attribute to display the best keyboard
-    to the user
-    *
-    -->
+
+    <!-- Adress -->
     <EditText
         android:id="@+id/address"
         android:layout_width="0dp"
@@ -83,6 +66,7 @@
         app:layout_constraintTop_toBottomOf="@id/price"
         />
 
+    <!-- Area -->
     <EditText
         android:id="@+id/area"
         android:layout_width="0dp"
@@ -95,6 +79,7 @@
         app:layout_constraintTop_toBottomOf="@id/address"
         />
 
+    <!-- Rooms -->
     <EditText
         android:id="@+id/rooms"
         android:layout_width="0dp"
@@ -107,15 +92,7 @@
         app:layout_constraintTop_toBottomOf="@id/area"
         />
 
-    <!--
-    * We use the hint attribute to display the "description me" string
-    * The type string has been extracted into a dedicated file
-    * The width is "0dp" because the "match_parent" value cannot be
-    used with the constraintLayout
-    * We use the inputType attribute to display the best keyboard
-    to the user
-    *
-    -->
+    <!-- description -->
     <EditText
         android:id="@+id/description"
         android:layout_width="0dp"
@@ -130,10 +107,7 @@
         app:layout_constraintTop_toBottomOf="@id/rooms"
         />
 
-    <!--
-    * We use the backgroundTint attribute to change the default color
-    of the button
-    -->
+    <!-- Add property button -->
     <Button
         android:id="@+id/add_property"
         android:layout_width="wrap_content"
