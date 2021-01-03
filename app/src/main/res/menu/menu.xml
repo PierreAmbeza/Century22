@@ -23,7 +23,14 @@
         android:id="@+id/gmaps"
         android:icon="@drawable/ic_map"
         android:title="View on map"
-        app:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom"
+        android:visible="false"
+        />
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        android:icon="@drawable/ic_baseline_search_24"
+        app:showAsAction="ifRoom"
         android:visible="false"
         />
 </menu>

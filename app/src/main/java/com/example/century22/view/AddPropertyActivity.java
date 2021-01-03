@@ -89,7 +89,16 @@ final public class AddPropertyActivity
             {
                 displayError();
             }
+            else if (event == Event.AddressNotFound)
+            {
+                displayAddressError();
+            }
         });
+    }
+
+    private void displayAddressError()
+    {
+        Toast.makeText(this, R.string.address_error, Toast.LENGTH_SHORT).show();
     }
 
     private void displayError()

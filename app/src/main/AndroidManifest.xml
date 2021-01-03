@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -27,15 +29,14 @@
         </activity>
         <activity
             android:name=".view.AgentsActivity" />
-            <!--android:noHistory="true"-->
-
         <activity
             android:name=".view.GoogleMapsActivity"
+            android:parentActivityName=".view.PropertiesActivity"
             />
         <activity
-            android:name=".view.PropertiesActivity" />
-            <!--android:noHistory="true"
-            -->
+            android:name=".view.PropertiesActivity"
+            android:launchMode="singleTop"
+            />
         <activity
             android:name=".view.AddPropertyActivity"
             android:parentActivityName=".view.PropertiesActivity"
@@ -43,6 +44,7 @@
         <activity
             android:name=".view.PropertyDetailActivity"
             android:parentActivityName=".view.PropertiesActivity"
+            android:launchMode="singleTop"
             />
         <activity
             android:name=".view.EditPropertyActivity"

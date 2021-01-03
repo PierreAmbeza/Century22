@@ -57,12 +57,12 @@ public class Property implements Serializable {
     @ColumnInfo(name = "Agent")
     public final String agent;
 
-    public final Date add_date;
+    public final String add_date;
 
-    public Date last_edit_date;
+    public String last_edit_date;
 
 
-    public Property(@NonNull String price, @NonNull String surface, @NonNull String rooms, @NonNull String type, @NonNull String description, @NonNull String address, double latitude, double longitude, @NonNull String status, @NonNull String agent, @NonNull Date add_date, @NonNull Date last_edit_date) {
+    public Property(@NonNull String price, @NonNull String surface, @NonNull String rooms, @NonNull String type, @NonNull String description, @NonNull String address, double latitude, double longitude, @NonNull String status, @NonNull String agent, @NonNull String add_date, @NonNull String last_edit_date) {
         this.price = price;
         this.surface = surface;
         this.rooms = rooms;

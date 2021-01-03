@@ -27,4 +27,10 @@
         app:backgroundTint="@color/colorPrimary"
         />
 
+    <include
+        android:id="@+id/search_view"
+        layout="@layout/search_view"
+        android:visibility="invisible"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

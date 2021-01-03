@@ -16,7 +16,7 @@ import com.example.century22.dao.StatusDAO;
 import com.example.century22.dao.TypeDAO;
 
 @Database(entities = {Agent.class, Status.class, Type.class, Property.class}, version = 1)
-@TypeConverters({Converters.class})
+//@TypeConverters({Converters.class})
 public abstract class AppDatabase
         extends RoomDatabase
 {

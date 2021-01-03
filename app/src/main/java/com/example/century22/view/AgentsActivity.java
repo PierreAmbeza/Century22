@@ -18,7 +18,6 @@ import java.util.List;
 
 final public class AgentsActivity
         extends AppCompatActivity
-        //implements View.OnClickListener
 {
 
     //The tag used into this screen for the logs
@@ -38,13 +37,14 @@ final public class AgentsActivity
         setContentView(R.layout.activity_main);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        viewModel.loadAgents();
+        observeAgents();
     }
 
     @Override
     protected void onResume()
     {
         super.onResume();
-        initList();
     }
 
     @Override
@@ -52,12 +52,12 @@ final public class AgentsActivity
         super.onBackPressed();
     }
 
-    private void initList()
+    private void observeAgents()
     {
-        final List<Agent> agents = viewModel.loadAgents();
-        final AgentAdapter agentsAdapter = new AgentAdapter(agents);
-        recyclerView.setAdapter(agentsAdapter);
-
+        viewModel.agents.observe(this, agents -> {
+            final AgentAdapter agentAdapter = new AgentAdapter(agents);
+            recyclerView.setAdapter(agentAdapter);
+        });
     }
 
 }

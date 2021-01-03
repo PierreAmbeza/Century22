@@ -23,7 +23,7 @@ public interface PropertyDAO {
     @Query("UPDATE Property SET price = :price , rooms = :rooms, address = :address, " +
             "last_edit_date = :edit, latitude = :latitude, longitude = :longitude, surface = :surface, " +
             "status = :status , description = :description WHERE id = :id")
-    void updateProperty(String price, String rooms,String surface, String address, Date edit, String description,
+    void updateProperty(String price, String rooms,String surface, String address, String edit, String description,
                         double latitude, double longitude, String status, int id);
 
     @Query("SELECT * FROM Property WHERE id = :id")

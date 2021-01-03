@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/search_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search_price"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/price_min"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/price_max"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_price"
+        app:layout_constraintBottom_toTopOf="@+id/search_area"
+        android:hint="Minimum price"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/price_max"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Maximum price"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/search_area"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/price_min"
+        app:layout_constraintTop_toBottomOf="@id/search_price" />
+
+    <TextView
+        android:id="@+id/search_area"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search_area"
+        app:layout_constraintTop_toBottomOf="@id/price_min"
+        app:layout_constraintBottom_toTopOf="@id/area_min"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
+    <EditText
+        android:id="@+id/area_min"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/area_max"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/search_area"
+        app:layout_constraintBottom_toTopOf="@+id/search_rooms"
+        android:hint="Minimum area"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/area_max"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Maximum area"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/search_rooms"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/area_min"
+        app:layout_constraintTop_toBottomOf="@id/search_area" />
+
+    <TextView
+        android:id="@+id/search_rooms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search_rooms"
+        app:layout_constraintTop_toBottomOf="@id/area_min"
+        app:layout_constraintBottom_toTopOf="@id/search_editDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+     />
+
+    <EditText
+        android:id="@+id/rooms_min"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/rooms_max"
+        app:layout_constraintTop_toBottomOf="@id/search_rooms"
+        app:layout_constraintBottom_toTopOf="@id/search_addDate"
+        android:hint="Minimum rooms"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:id="@+id/rooms_max"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/rooms_min"
+        app:layout_constraintTop_toBottomOf="@id/search_rooms"
+        app:layout_constraintBottom_toTopOf="@id/search_addDate"
+        android:hint="Maximum rooms"
+        android:inputType="number"
+        />
+
+
+    <TextView
+        android:id="@+id/search_addDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search_add"
+        app:layout_constraintTop_toBottomOf="@id/rooms_min"
+        app:layout_constraintBottom_toTopOf="@id/lastAddDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/search_editDate"
+        />
+
+    <TextView
+        android:id="@+id/search_editDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/search_edit"
+        app:layout_constraintTop_toBottomOf="@id/rooms_max"
+        app:layout_constraintBottom_toTopOf="@id/lastEditDate"
+        app:layout_constraintStart_toEndOf="@id/search_addDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <EditText
+        android:id="@+id/lastAddDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="yyyy-mm-dd"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@id/search_addDate"
+        app:layout_constraintBottom_toTopOf="@id/houseBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/search_editDate"
+        />
+
+    <EditText
+        android:id="@+id/lastEditDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="yyyy-mm-dd"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@id/search_editDate"
+        app:layout_constraintBottom_toTopOf="@id/officeBox"
+        app:layout_constraintStart_toEndOf="@id/search_addDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+    <CheckBox
+        android:id="@+id/houseBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lastAddDate"
+        app:layout_constraintBottom_toTopOf="@id/soldBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/flatBox"
+        android:checked="false"
+        android:buttonTint="@color/colorPrimary"
+        android:text="House"
+        />
+
+    <CheckBox
+        android:id="@+id/flatBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lastAddDate"
+        app:layout_constraintBottom_toTopOf="@id/soldBox"
+        app:layout_constraintStart_toEndOf="@id/houseBox"
+        app:layout_constraintEnd_toStartOf="@id/officeBox"
+        android:checked="false"
+        android:buttonTint="@color/colorPrimary"
+        android:text="Flat"
+        />
+
+    <CheckBox
+        android:id="@+id/officeBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lastEditDate"
+        app:layout_constraintBottom_toTopOf="@id/notSoldBox"
+        app:layout_constraintStart_toEndOf="@id/flatBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:buttonTint="@color/colorPrimary"
+        android:checked="false"
+        android:text="Office"
+        />
+
+    <CheckBox
+        android:id="@+id/soldBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/houseBox"
+        app:layout_constraintBottom_toTopOf="@id/search_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/notSoldBox"
+        android:buttonTint="@color/colorPrimary"
+        android:checked="false"
+        android:text="Sold"
+        />
+
+    <CheckBox
+        android:id="@+id/notSoldBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/officeBox"
+        app:layout_constraintBottom_toTopOf="@id/search_button"
+        app:layout_constraintStart_toEndOf="@id/soldBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:buttonTint="@color/colorPrimary"
+        android:checked="false"
+        android:text="Not sold"
+        />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/soldBox"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:buttonTint="@color/colorPrimary"
+        android:text="Search"
+        android:textColor="@color/black"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

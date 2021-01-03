@@ -15,6 +15,8 @@ import com.example.century22.repository.AppRepository;
 import com.example.century22.view.AddPropertyActivity;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -23,10 +25,8 @@ public final class AddPropertyActivityViewModel
         extends AndroidViewModel {
 
     public enum Event {
-        ResetForm, DisplayError
+        ResetForm, DisplayError, AddressNotFound
     }
-
-    private final String[] types = {"Office", "Flat", "House"};
 
     public MutableLiveData<Event> event = new MutableLiveData<>();
 
@@ -43,7 +43,6 @@ public final class AddPropertyActivityViewModel
         if (canAddProperty) {
             //We add the property to the list and we reset the form
             persistProperty(price, surface, rooms, type, description, address);
-            event.postValue(Event.ResetForm);
         } else {
             //we display a log error and a Toast
             event.postValue(Event.DisplayError);
@@ -57,14 +56,20 @@ public final class AddPropertyActivityViewModel
         Log.d(AddPropertyActivityViewModel.class.getSimpleName(), name);
         try {
             l = geocoder.getFromLocationName(address, 1);//get address from string address
-            double latitude = l.get(0).getLatitude();//get latitute from address
-            double longitude = l.get(0).getLongitude();//get longitude from address
-            Date d = Calendar.getInstance().getTime();//get current date, stored as add_date and edit_date on creation
-            AppRepository.getInstance(getApplication()).addProperty(new Property(price, surface,
-                    rooms, type, description, address, latitude, longitude, "Not sold", name, d, d));
+            if(l.size() != 0) {
+                double latitude = l.get(0).getLatitude();//get latitute from address
+                double longitude = l.get(0).getLongitude();//get longitude from address
+                Format f = new SimpleDateFormat("yyyy-MM-dd");
+                String strDate = f.format(new Date());
+                AppRepository.getInstance(getApplication()).addProperty(new Property(price, surface,
+                        rooms, type, description, address, latitude, longitude, "Not sold", name, strDate, strDate));
+                event.postValue(Event.ResetForm);
+            }
+            else{
+                event.postValue(Event.AddressNotFound);
+            }
         } catch (IOException e) {
-            event.postValue(Event.DisplayError);
-            //e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -95,7 +100,7 @@ public final class AddPropertyActivityViewModel
     }
 
     public String[] getTypes() {
-        return this.types;
+        return AppRepository.getInstance(getApplication()).getTypes();
     }
 
 }

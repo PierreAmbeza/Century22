@@ -79,12 +79,6 @@ public class AppRepository {
 
     public List<Agent> getAgents() { return appdatabase.agentDao().getAllAgents(); }
 
-    public void addAgent(Agent agent) { appdatabase.agentDao().addAgent(agent); }
-
-    public Agent getAgentByName(String name){ return appdatabase.agentDao().getAgentByName(name); }
-
-    public void deleteAgents(){ appdatabase.agentDao().del(); }
-
     public List<Property> getProperties() { return appdatabase.propertyDao().getAllProperties(); }
 
     public void addProperty(Property property)
@@ -92,7 +86,7 @@ public class AppRepository {
         appdatabase.propertyDao().addProperty(property);
     }
 
-    public void updateProperty(String price, String rooms, String surface, String address, Date edit, String description,
+    public void updateProperty(String price, String rooms, String surface, String address, String edit, String description,
                                double latitude, double longitude, String status, int id)
     {
         appdatabase.propertyDao().updateProperty(price,rooms, address, surface, edit, description, latitude, longitude, status, id);
@@ -102,19 +96,8 @@ public class AppRepository {
 
     public void deleteProperty(Property property){ appdatabase.propertyDao().del(property); }
 
-    public List<Type> getTypes() { return appdatabase.typeDAO().getAllTypes(); }
+    public String[] getTypes() { return appdatabase.typeDAO().getAllTypes(); }
 
-    public Type getTypeByName(String type){ return appdatabase.typeDAO().getTypeByName(type);}
+    public String[] getStatus() { return appdatabase.statusDAO().getAllStatus(); }
 
-    public void addType(Type type) { appdatabase.typeDAO().addType(type); }
-
-    public void deleteTypes(){ appdatabase.typeDAO().del(); }
-
-    public List<Status> getStatus() { return appdatabase.statusDAO().getAllStatus(); }
-
-    public Status getStatusByName(String status){ return appdatabase.statusDAO().getStatusByName(status);}
-
-    public void addStatus(Status status) { appdatabase.statusDAO().addStatus(status); }
-
-    public void deleteStatus(){ appdatabase.statusDAO().del(); }
 }

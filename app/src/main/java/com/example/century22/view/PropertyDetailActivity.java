@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +23,9 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.century22.R;
 import com.example.century22.bo.Agent;
 import com.example.century22.bo.Property;
+import com.example.century22.preferences.AppPreferences;
 import com.example.century22.viewmodel.AddPropertyActivityViewModel;
+import com.example.century22.viewmodel.LaunchActivityViewModel;
 import com.example.century22.viewmodel.PropertyDetailActivityViewModel;
 import com.example.century22.viewmodel.PropertyDetailActivityViewModel.Event;
 
@@ -88,6 +91,11 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         menu.findItem(R.id.delete).setVisible(true);
@@ -123,7 +131,7 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
     {
         viewModel.currency.observe(this, currency -> {
             //Then we bind the User and the UI
-            price.setText(currency.getConverted_price() + currency.getCurrency());
+            price.setText(currency.getConverted_price() + " " + currency.getCurrency());
             _currency = currency.getCurrency();
         });
     }
@@ -158,9 +166,9 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
     {
         viewModel.property.observe(this, property -> {
             //Then we bind the User and the UI
-            price.setText(property.price + _currency);
+            price.setText(property.price + " " + _currency);
             rooms.setText(property.rooms);
-            area.setText(property.surface);
+            area.setText(property.surface + " m2");
             description.setText(property.description);
             type.setText(property.type);
             status.setText(property.status);

@@ -19,6 +19,8 @@ import com.example.century22.view.EditPropertyActivity;
 import com.example.century22.view.PropertyDetailActivity;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,7 +28,7 @@ import java.util.List;
 public class EditPropertyActivityViewModel extends AndroidViewModel {
 
     public enum Event{
-        Edited, Error
+        Edited, Error, AddressNotFound
     }
 
     public MutableLiveData<Property> property = new MutableLiveData<>();
@@ -34,8 +36,6 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
     public MutableLiveData<Event> event = new MutableLiveData<>();
 
     private final Property propertyExtra;
-
-    private final String[] status = {"Not sold", "Sold"};
 
     public EditPropertyActivityViewModel(@NonNull Application application, SavedStateHandle savedStateHandle) {
         super(application);
@@ -51,7 +51,6 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
         if (canAddProperty) {
             //We add the property to the list and we reset the form
             updateProperty(price, surface, rooms, type, description, address);
-            event.postValue(Event.Edited);
         } else {
             //we display a log error and a Toast
             event.postValue(Event.Error);
@@ -64,13 +63,19 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
         List<Address> l;
         try {
             l = geocoder.getFromLocationName(address, 1);
-            double latitude = l.get(0).getLatitude();
-            double longitude = l.get(0).getLongitude();
-            Date edit = Calendar.getInstance().getTime();//get current time as edit_date
-            AppRepository.getInstance(getApplication()).updateProperty(price, rooms, address, surface, edit,
-                    description, latitude, longitude, status, property.getValue().id);
+            if(l.size() != 0) {
+                double latitude = l.get(0).getLatitude();
+                double longitude = l.get(0).getLongitude();
+                Format f = new SimpleDateFormat("MM/dd/yy");
+                String strDate = f.format(new Date());
+                AppRepository.getInstance(getApplication()).updateProperty(price, rooms, address, surface, strDate,
+                        description, latitude, longitude, status, property.getValue().id);
+                event.postValue(Event.Edited);
+            }
+            else{
+                event.postValue(Event.AddressNotFound);
+            }
         } catch (IOException e) {
-            event.postValue(Event.Error);
             //e.printStackTrace();
         }
     }
@@ -83,11 +88,12 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
 
 
     public String[] getStatus(){
-        return this.status;
+        return AppRepository.getInstance(getApplication()).getStatus();
     }
 
     /* Get index of current status of the property in the spinner*/
     public int getIndexFromStatus(String s){
+        String [] status = AppRepository.getInstance(getApplication()).getStatus();
         for(int i = 0; i < status.length; i++)
         {
             if(status[i].equals(s))

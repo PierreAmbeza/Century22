@@ -9,8 +9,17 @@
     <string name="type">Type</string>
     <string name="added_property">New property added!</string>
     <string name="cannot_add_property">Cannot add the property</string>
+    <string name="address_error">Error, address not found</string>
     <string name="logout">Log out</string>
     <string name="edit_property">Edit</string>
     <string name="edited_property">The property has been edited</string>
     <string name="cannot_edit_property">Cannot edit the property</string>
+    <string name="permissions">You need to enable the permission manually into the application settings.</string>
+    <string name="search_price">Price</string>
+    <string name="search_rooms">Rooms:</string>
+    <string name="search_area">Area:</string>
+    <string name="search_edit">Last edit date</string>
+    <string name="search_add">Last add date</string>
+    <string name="search_minRooms">Min rooms</string>
+    <string name="search_maxRooms">Max rooms</string>
 </resources>

@@ -58,7 +58,7 @@ public final class PropertyAdapter
             int imageResource = itemView.getContext().getResources()
                     .getIdentifier("@drawable/ic_"+ property.type.toLowerCase(), null, itemView.getContext().getPackageName());
             image.setImageResource(imageResource);
-            type.setText(property.type);
+            type.setText(property.type + ", " + property.address);
             description.setText(property.description);
             status.setText(property.status);
             area.setText(property.surface + "m2");

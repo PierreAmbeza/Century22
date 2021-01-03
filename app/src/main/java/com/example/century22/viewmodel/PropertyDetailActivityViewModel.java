@@ -1,6 +1,7 @@
 package com.example.century22.viewmodel;
 
 import android.app.Application;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.example.century22.preferences.AppPreferences;
 import com.example.century22.repository.AppRepository;
 import com.example.century22.view.PropertyDetailActivity;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import okhttp3.OkHttpClient;
@@ -60,13 +62,14 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
 
     public MutableLiveData<Exchange> currency = new MutableLiveData<>();
 
-    private final Property propertyExtra;
+    private Property propertyExtra;
 
     private Rates rate;
 
 
     public PropertyDetailActivityViewModel(@NonNull Application application, SavedStateHandle savedStateHandle) {
         super(application);
+        //Log.d(PropertyDetailActivityViewModel.class.getSimpleName(), propertyExtra.address);
         propertyExtra = savedStateHandle.get(PropertyDetailActivity.PROPERTY_EXTRA);
         property.postValue(propertyExtra);
     }
@@ -89,15 +92,15 @@ public class PropertyDetailActivityViewModel extends AndroidViewModel{
     /* Method to refresh the attributes if property has been edited */
     public void loadProperty()
     {
-        if(property.getValue() != null)
+        new Handler().postDelayed(() -> {
             property.postValue(AppRepository.getInstance(getApplication()).getProperty(property.getValue().id));
+        }, 100);
     }
 
     //Call the api
     private void currencyFromAPI(String current_currency){
         final HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor() ;
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        //city = checkCity(city);
         final OkHttpClient okHttp = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
         final Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.exchangeratesapi.io/")
                 .addConverterFactory(MoshiConverterFactory.create())//.build();
