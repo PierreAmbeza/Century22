@@ -79,6 +79,9 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
         creation = findViewById(R.id.creation);
         update = findViewById(R.id.update);
         address = findViewById(R.id.address);
+
+        findViewById(R.id.simulation).setOnClickListener(this);
+
         viewModel = new ViewModelProvider(this, new SavedStateViewModelFactory(getApplication(), this, getIntent().getExtras())).get(PropertyDetailActivityViewModel.class);
         observeEvent();
     }
@@ -122,8 +125,16 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
 
     @Override
     public void onClick(View v) {
-        viewModel.convert(_currency);
-        observeCurrency();
+        switch (v.getId()){
+            case R.id.currency:
+                viewModel.convert(_currency);
+                observeCurrency();
+            case R.id.simulation:
+                final Intent intent = new Intent(this, SimulatorActivity.class);
+                intent.putExtra(PropertyDetailActivity.PROPERTY_EXTRA, viewModel.property.getValue());
+                startActivity(intent);
+        }
+
     }
 
     /* Method to set property's attributes in the view */

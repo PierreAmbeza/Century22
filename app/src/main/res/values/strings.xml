@@ -22,4 +22,5 @@
     <string name="search_add">Last add date</string>
     <string name="search_minRooms">Min rooms</string>
     <string name="search_maxRooms">Max rooms</string>
+    <string name="start_simulation">Simulate</string>
 </resources>

@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SimpleSQLiteQuery;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.century22.Database.AppDatabase;
@@ -90,6 +91,10 @@ public class AppRepository {
                                double latitude, double longitude, String status, int id)
     {
         appdatabase.propertyDao().updateProperty(price,rooms, address, surface, edit, description, latitude, longitude, status, id);
+    }
+
+    public List<Property> searchProperties(SimpleSQLiteQuery query){
+        return appdatabase.propertyDao().searchProperties(query);
     }
 
     public Property getProperty(int id){ return appdatabase.propertyDao().getProperty(id);}

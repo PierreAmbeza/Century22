@@ -5,6 +5,8 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.RawQuery;
+import androidx.sqlite.db.SupportSQLiteQuery;
 
 import com.example.century22.bo.Property;
 
@@ -28,6 +30,9 @@ public interface PropertyDAO {
 
     @Query("SELECT * FROM Property WHERE id = :id")
     Property getProperty(int id);
+
+    @RawQuery
+    List<Property> searchProperties(SupportSQLiteQuery query);
 
     @Delete
     void del(Property property);

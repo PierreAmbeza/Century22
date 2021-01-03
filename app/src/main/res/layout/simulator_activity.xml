@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    >
+
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Simulator "
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/type_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="You are looking for one "
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/type"
+        app:layout_constraintEnd_toStartOf="@id/type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/type"
+         />
+
+    <TextView
+        android:id="@+id/type"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/type_label"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@id/price"
+        tools:text="@tools:sample/lorem"
+        android:textStyle="bold"
+        />
+
+    <!-- Price-->
+    <TextView
+        android:id="@+id/price_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/price"
+        app:layout_constraintBottom_toBottomOf="@id/price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/price"
+        android:text="The price is "
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/type"
+        app:layout_constraintBottom_toTopOf="@id/loan_duration"
+        app:layout_constraintStart_toEndOf="@id/price_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@tools:sample/lorem"
+        android:textStyle="bold"
+        />
+
+    <!--
+    * We use the hint attribute to display the "Address" string
+    * The type string has been extracted into a dedicated file
+    * The width is "0dp" because the "match_parent" value cannot be
+    used with the constraintLayout
+    * We use the inputType attribute to display the best keyboard
+    to the user
+    *
+    -->
+    <EditText
+        android:id="@+id/loan_duration"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Your loan duration"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@id/loan_rate"
+        app:layout_constraintEnd_toStartOf="@id/loan_duration_label"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/price"
+        />
+
+    <TextView
+        android:id="@+id/loan_duration_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/loan_duration"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/loan_duration"
+        app:layout_constraintTop_toTopOf="@id/loan_duration"
+        android:text="Months"
+        android:textStyle="bold"
+        />
+
+
+    <!--
+    * We use the backgroundTint attribute to change the default color
+    of the button
+    -->
+    <Button
+        android:id="@+id/start_simulation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="@string/start_simulation"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/contribution"
+        />
+
+    <TextView
+        android:id="@+id/loan_rate_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="(%) The loan rate of this property is  "
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/loan_rate"
+        app:layout_constraintEnd_toStartOf="@id/type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/loan_rate"
+        />
+
+
+    <TextView
+        android:id="@+id/loan_rate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/loan_rate_label"
+        app:layout_constraintTop_toBottomOf="@id/loan_duration"
+        app:layout_constraintBottom_toTopOf="@id/contribution"
+        tools:text="@tools:sample/lorem"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/contribution_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="The loan contribution is   "
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/contribution"
+        app:layout_constraintEnd_toStartOf="@id/type"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/contribution"
+        />
+
+    <TextView
+        android:id="@+id/contribution"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/contribution_label"
+        app:layout_constraintTop_toBottomOf="@id/loan_rate"
+        app:layout_constraintBottom_toTopOf="@id/start_simulation"
+        tools:text="@tools:sample/lorem"
+        android:textStyle="bold"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -83,12 +83,24 @@ final public class PropertiesActivity
         search_view = findViewById(R.id.search_view);
         min_rooms = findViewById(R.id.rooms_min);
         max_rooms = findViewById(R.id.rooms_max);
+        min_price = findViewById(R.id.price_min);
+        max_price = findViewById(R.id.price_max);
+        min_area = findViewById(R.id.area_min);
+        max_area = findViewById(R.id.area_max);
+
+        min_rooms.setText("1");
+        max_rooms.setText("20");
+        min_price.setText("0");
+        max_price.setText("10000000");
+        min_area.setText("0");
+        max_area.setText("20000");
 
         house = findViewById(R.id.houseBox);
         office = findViewById(R.id.officeBox);
         flat = findViewById(R.id.flatBox);
         sold = findViewById(R.id.soldBox);
         not_sold = findViewById(R.id.notSoldBox);
+
 
         house.setOnCheckedChangeListener(this);
         office.setOnCheckedChangeListener(this);
@@ -155,21 +167,21 @@ final public class PropertiesActivity
                 final Intent intent = new Intent(this, AddPropertyActivity.class);
                 startActivity(intent);
             case R.id.search_button:
-                final int _min_rooms = Integer.parseInt(min_rooms.getText().toString());
+                final String _min_rooms = min_rooms.getText().toString();
 
-                final int _max_rooms = Integer.parseInt(max_rooms.getText().toString());
+                final String _max_rooms = max_rooms.getText().toString();
 
-                final int _min_price = Integer.parseInt(min_price.getText().toString());
+                final String _min_price = min_price.getText().toString();
 
-                final int _max_price = Integer.parseInt(min_price.getText().toString());
+                final String _max_price = max_price.getText().toString();
 
-                final int _min_area = Integer.parseInt(min_area.getText().toString());
+                final String _min_area = min_area.getText().toString();
 
-                final int _max_area = Integer.parseInt(max_area.getText().toString());
+                final String _max_area = max_area.getText().toString();
 
-                final String _last_add_date = add_date.getText().toString();
+                final String _last_add_date ="";// add_date.getText().toString();
 
-                final String _last_edit_date = edit_date.getText().toString();
+                final String _last_edit_date ="";// edit_date.getText().toString();
 
                 viewModel.searchProperties(_min_price, _max_price, _min_area, _max_area, _min_rooms, _max_rooms, _last_add_date, _last_edit_date);
         }
@@ -179,6 +191,8 @@ final public class PropertiesActivity
         viewModel.properties.observe(this, properties -> {
             final PropertyAdapter propertyAdapter = new PropertyAdapter(properties);
             recyclerView.setAdapter(propertyAdapter);
+            search_view.setVisibility(View.INVISIBLE);
+            recyclerView.setVisibility(View.VISIBLE);
         });
     }
 

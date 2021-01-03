@@ -50,5 +50,9 @@
             android:name=".view.EditPropertyActivity"
             android:parentActivityName=".view.PropertyDetailActivity"
             />
+        <activity
+            android:name=".view.SimulatorActivity"
+            android:parentActivityName=".view.PropertyDetailActivity"
+            />
     </application>
 </manifest>
