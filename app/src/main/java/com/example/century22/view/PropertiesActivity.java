@@ -166,24 +166,22 @@ final public class PropertiesActivity
                 //We open the AddUserActivity screen when the user clicks on the FAB
                 final Intent intent = new Intent(this, AddPropertyActivity.class);
                 startActivity(intent);
+                break;
             case R.id.search_button:
                 final String _min_rooms = min_rooms.getText().toString();
-
                 final String _max_rooms = max_rooms.getText().toString();
 
                 final String _min_price = min_price.getText().toString();
-
                 final String _max_price = max_price.getText().toString();
 
                 final String _min_area = min_area.getText().toString();
-
                 final String _max_area = max_area.getText().toString();
 
                 final String _last_add_date ="";// add_date.getText().toString();
-
                 final String _last_edit_date ="";// edit_date.getText().toString();
 
                 viewModel.searchProperties(_min_price, _max_price, _min_area, _max_area, _min_rooms, _max_rooms, _last_add_date, _last_edit_date);
+                break;
         }
     }
 
@@ -193,6 +191,7 @@ final public class PropertiesActivity
             recyclerView.setAdapter(propertyAdapter);
             search_view.setVisibility(View.INVISIBLE);
             recyclerView.setVisibility(View.VISIBLE);
+            findViewById(R.id.property_add_button).setVisibility(View.VISIBLE);
         });
     }
 

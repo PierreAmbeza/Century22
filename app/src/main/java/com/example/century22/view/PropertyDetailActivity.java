@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -125,16 +126,17 @@ public class PropertyDetailActivity extends MenuActivity implements OnClickListe
 
     @Override
     public void onClick(View v) {
+        Log.d(TAG, String.valueOf(v.getId()));
         switch (v.getId()){
             case R.id.currency:
                 viewModel.convert(_currency);
                 observeCurrency();
+                break;
             case R.id.simulation:
                 final Intent intent = new Intent(this, SimulatorActivity.class);
                 intent.putExtra(PropertyDetailActivity.PROPERTY_EXTRA, viewModel.property.getValue());
                 startActivity(intent);
         }
-
     }
 
     /* Method to set property's attributes in the view */
