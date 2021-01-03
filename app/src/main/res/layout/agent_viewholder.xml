@@ -15,6 +15,10 @@
     android:padding="12dp"
     >
 
+    <!-- File used to display some informations about an agent -->
+
+
+    <!-- Display an icone next to the informations -->
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="50dp"
@@ -28,6 +32,7 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+    <!-- Display the name of the agent -->
     <TextView
         android:id="@+id/name"
         android:layout_width="0dp"

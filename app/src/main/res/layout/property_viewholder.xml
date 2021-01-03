@@ -9,6 +9,8 @@
     android:padding="12dp"
     >
 
+    <!-- Used to display some informations about a property and click on it -->
+
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="50dp"

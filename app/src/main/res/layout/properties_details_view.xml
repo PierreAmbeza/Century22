@@ -9,6 +9,9 @@
     tools:context=".view.PropertyDetailActivity"
     >
 
+    <!-- File to display all the informations about a property, we decided to use a scrollView
+     because we don't know the size of the description, and we want to display it all-->
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -236,7 +239,6 @@
 
         <!-- Simulation : link for the simulation-->
 
-        <!-- Description -->
         <Button
             android:id="@+id/simulation"
             android:layout_width="wrap_content"
@@ -250,6 +252,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/agent" />
 
+        <!-- Description -->
         <TextView
             android:id="@+id/description_label"
             android:layout_width="0dp"
@@ -261,6 +264,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/simulation" />
 
+        <!-- Description -->
         <TextView
             android:id="@+id/description"
             android:layout_width="0dp"
@@ -273,6 +277,7 @@
             tools:text="@tools:sample/lorem/random"
             />
 
+        <!-- Button to convert € to $ or $ to € -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/currency"
             android:layout_width="wrap_content"

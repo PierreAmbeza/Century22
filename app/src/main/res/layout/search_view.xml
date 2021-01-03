@@ -206,7 +206,7 @@
         app:layout_constraintEnd_toStartOf="@id/MinAddDate"
         />
 
-
+    <!-- CheckBox, very usefull for the research mode -->
     <CheckBox
         android:id="@+id/houseBox"
         android:layout_width="0dp"

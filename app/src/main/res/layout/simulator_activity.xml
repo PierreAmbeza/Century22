@@ -8,6 +8,7 @@
     android:padding="20dp"
     >
 
+    <!-- Used to do a simulation of a loan and know the price for a X months location-->
 
     <TextView
         android:id="@+id/title"
