@@ -66,7 +66,7 @@ public class EditPropertyActivityViewModel extends AndroidViewModel {
             if(l.size() != 0) {
                 double latitude = l.get(0).getLatitude();
                 double longitude = l.get(0).getLongitude();
-                Format f = new SimpleDateFormat("MM/dd/yy");
+                Format f = new SimpleDateFormat("yyyy-MM-dd");
                 String strDate = f.format(new Date());
                 AppRepository.getInstance(getApplication()).updateProperty(price, rooms, address, surface, strDate,
                         description, latitude, longitude, status, property.getValue().id);

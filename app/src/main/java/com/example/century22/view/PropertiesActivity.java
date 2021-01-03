@@ -56,9 +56,13 @@ final public class PropertiesActivity
 
     private EditText max_area;
 
-    private EditText add_date;
+    private EditText max_add_date;
 
-    private EditText edit_date;
+    private EditText max_edit_date;
+
+    private EditText min_add_date;
+
+    private EditText min_edit_date;
 
     private CheckBox house;
 
@@ -87,6 +91,10 @@ final public class PropertiesActivity
         max_price = findViewById(R.id.price_max);
         min_area = findViewById(R.id.area_min);
         max_area = findViewById(R.id.area_max);
+        max_add_date = findViewById(R.id.MaxAddDate);
+        min_add_date = findViewById(R.id.MinAddDate);
+        max_edit_date = findViewById(R.id.MaxEditDate);
+        min_edit_date = findViewById(R.id.MinEditDate);
 
         min_rooms.setText("1");
         max_rooms.setText("20");
@@ -94,6 +102,7 @@ final public class PropertiesActivity
         max_price.setText("10000000");
         min_area.setText("0");
         max_area.setText("20000");
+
 
         house = findViewById(R.id.houseBox);
         office = findViewById(R.id.officeBox);
@@ -111,7 +120,7 @@ final public class PropertiesActivity
         viewModel = new ViewModelProvider(this).get(PropertiesActivityViewModel.class);
         //We configure the click on the fab
         findViewById(R.id.property_add_button).setOnClickListener(this);
-
+        findViewById(R.id.view_all).setOnClickListener(this);
         findViewById(R.id.search_button).setOnClickListener(this);
 
         observeProperties();
@@ -162,6 +171,10 @@ final public class PropertiesActivity
     public void onClick(View v)
     {
         switch(v.getId()){
+            case R.id.view_all:
+                viewModel.loadProperties();
+                observeProperties();
+                break;
             case R.id.property_add_button:
                 //We open the AddUserActivity screen when the user clicks on the FAB
                 final Intent intent = new Intent(this, AddPropertyActivity.class);
@@ -177,37 +190,50 @@ final public class PropertiesActivity
                 final String _min_area = min_area.getText().toString();
                 final String _max_area = max_area.getText().toString();
 
-                final String _last_add_date ="";// add_date.getText().toString();
-                final String _last_edit_date ="";// edit_date.getText().toString();
+                final String _max_add_date = max_add_date.getText().toString();
+                final String _min_add_date = min_add_date.getText().toString();
+                final String _max_edit_date = max_edit_date.getText().toString();
+                final String _min_edit_date = min_edit_date.getText().toString();
 
-                viewModel.searchProperties(_min_price, _max_price, _min_area, _max_area, _min_rooms, _max_rooms, _last_add_date, _last_edit_date);
+                viewModel.searchProperties(_min_price, _max_price, _min_area, _max_area, _min_rooms, _max_rooms, _min_add_date, _max_add_date,_min_edit_date, _max_edit_date);
+                observeEvent();
                 break;
         }
+    }
+
+    private void observeEvent(){
+        viewModel.event.observe(this, event -> {
+            if(event == PropertiesActivityViewModel.Event.CannotSearch)
+            {
+                Toast.makeText(this, "Invalid search", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                search_view.setVisibility(View.INVISIBLE);
+                recyclerView.setVisibility(View.VISIBLE);
+                findViewById(R.id.property_add_button).setVisibility(View.VISIBLE);
+                resetSearch();
+            }
+        });
+    }
+
+    private void resetSearch()
+    {
+        min_add_date.setText(null);
+        max_add_date.setText(null);
+        min_edit_date.setText(null);
+        max_edit_date.setText(null);
     }
 
     private void observeProperties() {
         viewModel.properties.observe(this, properties -> {
             final PropertyAdapter propertyAdapter = new PropertyAdapter(properties);
             recyclerView.setAdapter(propertyAdapter);
-            search_view.setVisibility(View.INVISIBLE);
-            recyclerView.setVisibility(View.VISIBLE);
-            findViewById(R.id.property_add_button).setVisibility(View.VISIBLE);
         });
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked && (buttonView.getId() == R.id.houseBox || buttonView.getId() == R.id.officeBox || buttonView.getId() == R.id.flatBox)){
-            viewModel.addType(buttonView.getText().toString());
-        }
-        else {
-            viewModel.types.remove(buttonView.getText().toString());
-        }
-        if (isChecked && (buttonView.getId() == R.id.soldBox || buttonView.getId() == R.id.notSoldBox)){
-            viewModel.addStatus(buttonView.getText().toString());
-        }
-        else {
-            viewModel.status.remove(buttonView.getText().toString());
-        }
+        viewModel.checkBoxManager(buttonView.getId(), isChecked, buttonView.getText().toString());
     }
 }
