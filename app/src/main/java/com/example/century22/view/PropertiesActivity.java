@@ -170,7 +170,7 @@ final public class PropertiesActivity
         switch(v.getId()){
             case R.id.view_all://View all properties
                 viewModel.loadProperties();
-                //observeProperties();
+                observeEvent();
                 break;
             case R.id.property_add_button:
                 //We open the AddPropertyActivity screen when the user clicks on the FAB
